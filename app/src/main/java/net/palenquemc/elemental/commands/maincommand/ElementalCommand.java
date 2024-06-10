@@ -21,6 +21,8 @@ public class ElementalCommand implements TabExecutor {
     
     public ElementalCommand(Elemental plugin) {
         this.plugin = plugin;
+
+        addSubcommands();
     }
 
     MiniMessage mm = MiniMessage.miniMessage();
@@ -35,14 +37,12 @@ public class ElementalCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        addSubcommands();
-
         FileConfiguration messages = plugin.config.getConfig("messages.yml");
             
-        // if(!sender.hasPermission("elemental.plugininfo")) {
-        //     sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
-        //     return true;
-        // }
+        if(!sender.hasPermission("elemental.plugininfo")) {
+            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            return true;
+        }
 
         if(args.length == 0) {
             sender.sendMessage(mm.deserialize(messages.getString("messages.plugin_info"), Placeholder.unparsed("version", plugin.version)));
@@ -57,8 +57,6 @@ public class ElementalCommand implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        addSubcommands();
-
         List<String> arguments = new ArrayList<>();
 
         subcommands.forEach((name, subcommand) -> {
