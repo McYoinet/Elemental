@@ -1,0 +1,15 @@
+# Elemental - Messages
+
+messages:
+  insufficient_permissions: "<dark_grey>[<red>Elemental<dark_grey>] <white>Insufficient permissions."
+  unknown_subcommand: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown subcommand."
+  path_test:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/elemental pathtest <aqua><path>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/elemental pathtest <aqua>messages.insufficient_permissions
+  plugin_info: |-
+    <reset>
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Developed by <light_purple>McYoinet<white> on version <light_purple><version><white>.
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Use <dark_aqua>/elemental help<white> to get a list of commands.
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Get support on the Discord server: <blue>https://discord.gg/fkmKSXUBZ4
+    <reset>

@@ -1,0 +1,43 @@
+# Main information
+name: Elemental
+version: 0.0.1-BETA
+main: net.palenquemc.elemental.Elemental
+
+# Complementary information
+api-version: '1.20.6'
+description: Plugin with elemental features.
+
+# Contact information
+author: McYoinet
+website: https://plugins.palenquemc.net/Elemental
+
+# Commands
+commands:
+  elemental:
+    description: Main command of the plugin. Shows general information about it.
+    usage: "/elemental"
+    permission: elemental.plugininfo
+    permission-message: "Insufficient permissions."
+
+# Permissions
+permissions:
+  elemental.plugininfo:
+    description: Allows to view the plugin information when using the main command without arguments.
+    default: false
+  elemental.pluginhelp:
+    description: Allows to use the help argument on the main command.
+    default: false
+  elemental.pathtest:
+    description: Allows to use the pathtest argument on the main command.
+    default: false
+  elemental.reload:
+    description: Allows to reload the configuration files of the plugin.
+    default: false
+  elemental.*:
+    description: Wildcard permission for the plugin.
+    default: false
+    children:
+      elemental.plugininfo: true
+      elemental.pluginhelp: true
+      elemental.pathtest: true
+      elemental.reload: true
