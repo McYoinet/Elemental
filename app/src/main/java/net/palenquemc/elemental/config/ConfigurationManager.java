@@ -50,4 +50,27 @@ public class ConfigurationManager {
     public FileConfiguration getConfig(String filename) {
         return configs.get(filename);
     }
+
+    public boolean reloadConfig() {
+        configs.forEach((filename, config) -> {
+            File file = new File(plugin.getDataFolder(), filename);
+
+            if(!file.exists()) {
+                file.getParentFile().mkdirs();
+                plugin.saveResource(filename, false);
+            }
+
+            try {
+                config.load(file);
+            } catch(IOException | InvalidConfigurationException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return true;
+    }
+
+    public HashMap<String, FileConfiguration> getConfigHashMap() {
+        return configs;
+    }
 }

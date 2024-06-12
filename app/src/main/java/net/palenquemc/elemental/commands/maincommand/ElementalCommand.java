@@ -15,10 +15,11 @@ import net.palenquemc.elemental.Elemental;
 import net.palenquemc.elemental.commands.SubcommandTemplate;
 import net.palenquemc.elemental.commands.maincommand.subcommands.Help;
 import net.palenquemc.elemental.commands.maincommand.subcommands.PathTest;
+import net.palenquemc.elemental.commands.maincommand.subcommands.Reload;
 
 public class ElementalCommand implements TabExecutor {
     private final Elemental plugin;
-    
+
     public ElementalCommand(Elemental plugin) {
         this.plugin = plugin;
 
@@ -31,28 +32,32 @@ public class ElementalCommand implements TabExecutor {
 
     private void addSubcommands() {
         subcommands.put("help", new Help());
-        subcommands.put("pathtest", new PathTest());
-        subcommands.put("reload", new PathTest());
+        subcommands.put("pathtest", new PathTest(plugin));
+        subcommands.put("reload", new Reload(plugin));
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         FileConfiguration messages = plugin.config.getConfig("messages.yml");
-            
-        if(!sender.hasPermission("elemental.plugininfo")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
-            return true;
-        }
 
         if(args.length == 0) {
+            if(!sender.hasPermission("elemental.plugininfo")) {
+                sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+                
+                return false;
+            }
+
             sender.sendMessage(mm.deserialize(messages.getString("messages.plugin_info"), Placeholder.unparsed("version", plugin.version)));
-        } else if(args.length == 1 && subcommands.containsKey(args[0])){
-            subcommands.get(args[0]).execute();
+            
+            return true;
+        } else if(args.length >= 1 && subcommands.containsKey(args[0])){
+            boolean result = subcommands.get(args[0]).execute(sender, command, args);
+            
+            return result;
         } else {
             sender.sendMessage(mm.deserialize(messages.getString("messages.unknown_subcommand")));
+            return false;
         }
-        
-        return true;
     }
 
     @Override

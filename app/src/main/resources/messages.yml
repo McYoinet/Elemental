@@ -3,13 +3,21 @@
 messages:
   insufficient_permissions: "<dark_grey>[<red>Elemental<dark_grey>] <white>Insufficient permissions."
   unknown_subcommand: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown subcommand."
-  path_test:
-    usage: |-
-      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/elemental pathtest <aqua><path>
-      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/elemental pathtest <aqua>messages.insufficient_permissions
+  reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
   plugin_info: |-
     <reset>
     <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Developed by <light_purple>McYoinet<white> on version <light_purple><version><white>.
     <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Use <dark_aqua>/elemental help<white> to get a list of commands.
     <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Get support on the Discord server: <blue>https://discord.gg/fkmKSXUBZ4
     <reset>
+  path_test:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/elemental pathtest <aqua><path>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/elemental pathtest <aqua>messages.insufficient_permissions
+    file_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>File <light_purple><file> <white>not found."
+    path_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Path <light_purple><path> <white>in file <light_purple><file> <white>not found."
+    path_found: |-
+      <reset>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Showing value stored in <light_purple><path><white> of <light_purple><file><white>:
+      <reset>
+      <path_value>
