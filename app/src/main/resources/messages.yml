@@ -1,15 +1,9 @@
 # Elemental - Messages
+# Using MiniMessage format - https://docs.advntr.dev/minimessage/format.html
 
 messages:
   insufficient_permissions: "<dark_grey>[<red>Elemental<dark_grey>] <white>Insufficient permissions."
   unknown_subcommand: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown subcommand."
-  reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
-  plugin_info: |-
-    <reset>
-    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Developed by <light_purple>McYoinet<white> on version <light_purple><version><white>.
-    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Use <dark_aqua>/elemental help<white> to get a list of commands.
-    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Get support on the Discord server: <blue>https://discord.gg/fkmKSXUBZ4
-    <reset>
   path_test:
     usage: |-
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/elemental pathtest <aqua><path>
@@ -21,3 +15,31 @@ messages:
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Showing value stored in <light_purple><path><white> of <light_purple><file><white>:
       <reset>
       <path_value>
+  broadcast:
+    missing_message: "<dark_grey>[<red>Elemental<dark_grey>] <white>You must specify a message to broadcast."
+    broadcast: "<dark_grey>[<red>Broadcast<dark_grey>] <white><message>"
+    sound:
+      enable: true
+      source: "BLOCK"
+      key: "note_block.pling"
+      volume: 1f
+      pitch: 1f
+    title:
+      enable: false
+      main_title: "<message>"
+      subtitle: "This is a broadcast"
+  reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
+  plugin_info: |-
+    <reset>
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Developed by <light_purple>McYoinet<white> on version <light_purple><version><white>.
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Use <dark_aqua>/elemental help<white> to get a list of commands.
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Get support on the Discord server: <blue>https://discord.gg/fkmKSXUBZ4
+    <reset>
+  plugin_help: |-
+    <reset>
+    <dark_grey> ➤ <white>Showing help page of <#00e580>Elemental <light_purple>v<version><white>.
+    <dark_grey> ▸ <dark_aqua>/elemental <grey>➝ <white>Shows general plugin information.
+    <dark_grey> ▸ <dark_aqua>/elemental help <grey>➝ <white>Shows this information page.
+    <dark_grey> ▸ <dark_aqua>/elemental pathtest <aqua><file> <path> <grey>➝ <white>Prints the value stored in the specified path of the chosen file - Must be in valid YAML notation.
+    <dark_grey> ▸ <dark_aqua>/elemental reload ➝ <white>Reloads the configuration files of the plugin.
+    <reset>

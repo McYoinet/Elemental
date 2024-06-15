@@ -17,9 +17,14 @@ website: https://plugins.palenquemc.net/Elemental
 commands:
   elemental:
     description: Main command of the plugin. Shows general information about it.
+  broadcast:
+    description: Broadcasts a message to all players in the server.
 
 # Permissions
 permissions:
   elemental.plugininfo:
     description: Allows the usage of /elemental
+    default: op
+  elemental.broadcast:
+    description: Allows the usage of /broadcast
     default: op

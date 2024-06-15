@@ -5,10 +5,21 @@ import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.palenquemc.elemental.Elemental;
 import net.palenquemc.elemental.commands.SubcommandTemplate;
 
 public class Help implements SubcommandTemplate {
+    private Elemental plugin;
+
+    MiniMessage mm = MiniMessage.miniMessage();
+
+    public Help (Elemental plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public String permission() {
         return "elemental.pluginhelp";
@@ -21,7 +32,17 @@ public class Help implements SubcommandTemplate {
 
     @Override
     public boolean execute(CommandSender sender, Command command, String[] args) {
-        return false;
+        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+
+        if(!sender.hasPermission(permission())) {
+            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+        
+            return false;
+        }
+
+        sender.sendMessage(mm.deserialize(messages.getString("messages.plugin_help")));
+        
+        return true;
     }
     
 }

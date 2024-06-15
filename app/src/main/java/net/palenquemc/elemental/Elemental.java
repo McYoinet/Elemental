@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.palenquemc.elemental.commands.Broadcast;
 import net.palenquemc.elemental.commands.maincommand.ElementalCommand;
 import net.palenquemc.elemental.config.ConfigurationManager;
 
@@ -41,5 +42,6 @@ public class Elemental extends JavaPlugin {
 
     private void registerCommands() {
         getCommand("elemental").setExecutor(new ElementalCommand(this));
+        getCommand("broadcast").setExecutor(new Broadcast(this));
     }
 }

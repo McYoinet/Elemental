@@ -31,7 +31,7 @@ public class ElementalCommand implements TabExecutor {
     HashMap<String, SubcommandTemplate> subcommands = new HashMap<>();
 
     private void addSubcommands() {
-        subcommands.put("help", new Help());
+        subcommands.put("help", new Help(plugin));
         subcommands.put("pathtest", new PathTest(plugin));
         subcommands.put("reload", new Reload(plugin));
     }
