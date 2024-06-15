@@ -4,6 +4,9 @@
 messages:
   insufficient_permissions: "<dark_grey>[<red>Elemental<dark_grey>] <white>Insufficient permissions."
   unknown_subcommand: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown subcommand."
+  executable_from_console: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can only execute this command from the console."
+  executable_from_player: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can only execute this command as a player."
+  target_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player> <white>not found."
   path_test:
     usage: |-
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/elemental pathtest <aqua><path>
@@ -28,6 +31,15 @@ messages:
       enable: false
       main_title: "<message>"
       subtitle: "This is a broadcast"
+  gamemode:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/gamemode <aqua><gamemode> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/pathtest <aqua>creative Player
+    unknown_gamemode: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown gamemode."
+    set:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your gamemode was set to <light_purple><gamemode><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Target player <light_purple><target_player>'s<white> gamemode was set to <light_purple><gamemode><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your gamemode was set to <light_purple><gamemode><white> by <light_purple><command_sender><white>."
   reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
   plugin_info: |-
     <reset>

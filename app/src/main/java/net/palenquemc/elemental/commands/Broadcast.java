@@ -29,7 +29,7 @@ public class Broadcast implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         FileConfiguration messages = plugin.config.getConfig("messages.yml");
 
-        if(!sender.hasPermission(command.getPermission())) {
+        if(!sender.hasPermission("elmental.broadcast")) {
             sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
             
             return true;

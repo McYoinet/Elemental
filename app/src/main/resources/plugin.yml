@@ -19,6 +19,8 @@ commands:
     description: Main command of the plugin. Shows general information about it.
   broadcast:
     description: Broadcasts a message to all players in the server.
+  gamemode:
+    description: Set a player's gamemode.
 
 # Permissions
 permissions:
@@ -28,3 +30,8 @@ permissions:
   elemental.broadcast:
     description: Allows the usage of /broadcast
     default: op
+  elemental.gamemode:
+    description: Allows the usage of /gamemode
+    default: op
+    children:
+      elemental.gamemode.others: true
