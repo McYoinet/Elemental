@@ -50,7 +50,7 @@ public class Teleport implements TabExecutor {
             Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
             if(targetPlayer == null) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[1])));
+                sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[0])));
 
                 return true;
             }
@@ -62,7 +62,7 @@ public class Teleport implements TabExecutor {
             }
 
             player.teleport(targetPlayer);
-            sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.self"), Placeholder.unparsed("target_destination", args[1])));
+            sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.self"), Placeholder.unparsed("target_destination", args[0])));
 
             return true;
 

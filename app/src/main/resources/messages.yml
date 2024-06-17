@@ -47,13 +47,21 @@ messages:
   teleport:
     usage: |-
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/teleport <aqua><player> [player]
-      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/pathtest <aqua>Player1
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/teleport <aqua>Player1
     invalid_location: "<dark_grey>[<red>Elemental<dark_grey>] <white>Specify a valid set of coordinates."
     cannot_teleport_to_self: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can't teleport to yourself."
     teleported:
       self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to <light_purple><target_destination><white>."
       to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was teleported to <light_purple><target_destination><white>."
       by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to <light_purple><target_destination> <white>by <light_purple><command_sender><white>."
+  world:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/world <aqua><world> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/world <aqua>Player1
+    world_changed:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the world <light_purple><world><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was teleported to world <light_purple><world><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the world <light_purple><world> <white>by <light_purple><command_sender><white>."
   reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
   plugin_info: |-
     <reset>
