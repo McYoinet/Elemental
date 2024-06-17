@@ -57,10 +57,22 @@ public class Gamemode implements TabExecutor {
             }
 
             if(args.length == 2) {
+                if(args[1].equalsIgnoreCase("@a")) {
+                    for(Player player : plugin.getServer().getOnlinePlayers()) {
+                        player.setGameMode(gm);
+
+                        player.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.by_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("command_sender", sender.getName())));                       
+                    }
+
+                    sender.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.all"), Placeholder.unparsed("gamemode", gmString)));
+
+                    return true;
+                }
+
                 Player targetPlayer = plugin.getServer().getPlayer(args[1]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found")));
+                    sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[1])));
 
                     return true;
                 }
@@ -81,7 +93,7 @@ public class Gamemode implements TabExecutor {
                 }
 
                 if(targetPlayersList.isEmpty()) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found")));
+                    sender.sendMessage(mm.deserialize(messages.getString("messages.server_is_empty")));
 
                     return true;
                 }
@@ -99,6 +111,8 @@ public class Gamemode implements TabExecutor {
         } else if(args.length == 1) {
             if(!(sender instanceof Player)) {
                 sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+
+                return true;
             }
 
             Player player = (Player) sender;
@@ -117,17 +131,11 @@ public class Gamemode implements TabExecutor {
         ArrayList<String> arguments = new ArrayList<>();
 
         if(args.length == 1) {
-            arguments.add("<gamemode>");
 
             arguments.add("survival");
             arguments.add("creative");
             arguments.add("adventure");
             arguments.add("spectator");
-
-            arguments.add("s");
-            arguments.add("c");
-            arguments.add("a");
-            arguments.add("sp");
 
             arguments.add("0");
             arguments.add("1");
@@ -135,6 +143,7 @@ public class Gamemode implements TabExecutor {
             arguments.add("3");
         } else if(args.length > 1) {
             arguments.add("[player]");
+            arguments.add("@a");
             
             for(Player player : plugin.getServer().getOnlinePlayers()) {
                 arguments.add(player.getName());
