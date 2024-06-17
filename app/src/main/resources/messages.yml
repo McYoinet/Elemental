@@ -58,6 +58,7 @@ messages:
     usage: |-
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/world <aqua><world> [player]
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/world <aqua>Player1
+    world_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target world <light_purple><world> <white>not found."
     world_changed:
       self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the world <light_purple><world><white>."
       to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was teleported to world <light_purple><world><white>."
