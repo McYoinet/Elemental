@@ -73,18 +73,33 @@ public class Teleport implements TabExecutor {
                 return true;
             }
 
-            Player targetPlayer = plugin.getServer().getPlayer(args[0]);
             Player destinationPlayer = plugin.getServer().getPlayer(args[1]);
-
-            if(targetPlayer == null) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[0])));
-                
-                return true;
-            }
 
             if(destinationPlayer == null) {
                 sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[1])));
             
+                return true;
+            }
+
+            if(args[0].equalsIgnoreCase("@a")) {
+                for(Player player : plugin.getServer().getOnlinePlayers()) {
+                    player.teleport(destinationPlayer);
+
+                    if(player.getName() != sender.getName()) {
+                        player.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", destinationPlayer.getName()), Placeholder.unparsed("command_sender", sender.getName())));                       
+                    }
+                }
+                
+                sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.all"), Placeholder.unparsed("target_destination", destinationPlayer.getName())));
+
+                return true;
+            }
+
+            Player targetPlayer = plugin.getServer().getPlayer(args[0]);
+
+            if(targetPlayer == null) {
+                sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                
                 return true;
             }
 
@@ -121,6 +136,43 @@ public class Teleport implements TabExecutor {
                 }
                 
             } else if(args.length == 4){
+                if(!(sender instanceof Player)) {
+                    sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+    
+                    return true;
+                }
+
+                Player player = (Player) sender;
+
+                if(args[0].equalsIgnoreCase("@a")) {
+                    double x, y, z;
+                    Location loc;
+                    
+                    try {
+                        x = Double.parseDouble(args[1]);
+                        y = Double.parseDouble(args[2]);
+                        z = Double.parseDouble(args[3]);
+                        
+                        loc = new Location(player.getWorld(), x, y, z);
+                    } catch(NumberFormatException e) {
+                        sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.invalid_location")));
+        
+                        return true;
+                    }
+
+                    for(Player targetPlayer : plugin.getServer().getOnlinePlayers()) {
+                        targetPlayer.teleport(loc);
+    
+                        if(targetPlayer.getName() != sender.getName()) {
+                            sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ())), Placeholder.unparsed("command_sender", sender.getName())));                       
+                        }
+                    }
+                    
+                    sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.all"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ()))));
+    
+                    return true;
+                }
+                
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
@@ -134,7 +186,7 @@ public class Teleport implements TabExecutor {
                     double y = Double.parseDouble(args[2]);
                     double z = Double.parseDouble(args[3]);
 
-                    Location loc = new Location(targetPlayer.getWorld(), x, y, z);
+                    Location loc = new Location(player.getWorld(), x, y, z);
 
                     targetPlayer.teleport(loc);
 

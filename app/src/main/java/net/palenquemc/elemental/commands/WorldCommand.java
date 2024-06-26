@@ -45,6 +45,8 @@ public class WorldCommand implements TabExecutor {
 
             if(plugin.getServer().getWorld(worldname) == null) {
                 sender.sendMessage(mm.deserialize(messages.getString("messages.world.world_not_found"), Placeholder.unparsed("world", worldname)));
+
+                return true;
             }
             
             if(args.length == 1) {
@@ -57,7 +59,7 @@ public class WorldCommand implements TabExecutor {
                 Player player = (Player) sender;
     
                 player.teleport(world.getSpawnLocation());
-                sender.sendMessage(mm.deserialize("messages.world.world_changed.self", Placeholder.unparsed("world", worldname)));
+                sender.sendMessage(mm.deserialize(messages.getString("messages.world.world_changed.self"), Placeholder.unparsed("world", worldname)));
             } else if(args.length == 2) {
                 if(!sender.hasPermission("elemental.teleport.others")) {
                     sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));

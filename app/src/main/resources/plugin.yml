@@ -26,6 +26,9 @@ commands:
   teleport:
     description: Teleports a player to the specified location.
     aliases: [tp, tele, move]
+  world:
+    description: Teleports a player to the specified world
+    aliases: [changeworld, moveworld]
 
 # Permissions
 permissions:
@@ -41,7 +44,7 @@ permissions:
     children:
       elemental.gamemode.others: true
   elemental.teleport:
-    description: Allows the usage of /teleport
+    description: Allows the usage of /teleport and related commands
     default: op
     children:
       elemental.teleport.others: true
