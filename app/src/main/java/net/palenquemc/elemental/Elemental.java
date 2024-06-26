@@ -8,6 +8,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.commands.Broadcast;
 import net.palenquemc.elemental.commands.Gamemode;
+import net.palenquemc.elemental.commands.RandomTeleport;
 import net.palenquemc.elemental.commands.Teleport;
 import net.palenquemc.elemental.commands.WorldCommand;
 import net.palenquemc.elemental.commands.maincommand.ElementalCommand;
@@ -49,5 +50,6 @@ public class Elemental extends JavaPlugin {
         getCommand("gamemode").setExecutor(new Gamemode(this));
         getCommand("teleport").setExecutor(new Teleport(this));
         getCommand("world").setExecutor(new WorldCommand(this));
+        getCommand("rtp").setExecutor(new RandomTeleport(this));
     }
 }

@@ -29,6 +29,9 @@ commands:
   world:
     description: Teleports a player to the specified world
     aliases: [changeworld, moveworld]
+  rtp:
+    description: Teleports a player to another randomly selected player. There must be at least 3 online players.
+    aliases: [randomteleport, rtele, rteleport, rmove]
 
 # Permissions
 permissions:
@@ -48,3 +51,4 @@ permissions:
     default: op
     children:
       elemental.teleport.others: true
+      elemental.teleport.random: true

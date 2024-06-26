@@ -27,7 +27,7 @@ public class WorldCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         FileConfiguration messages = plugin.config.getConfig("messages.yml");
 
-        if(!sender.hasPermission("elmental.teleport")) {
+        if(!sender.hasPermission("elemental.teleport")) {
             sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
             
             return true;
