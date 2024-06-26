@@ -104,6 +104,10 @@ public class RandomTeleport implements TabExecutor {
 
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         List<String> arguments = new ArrayList<>();
+
+        if(args.length == 1) {
+            arguments.add("[player]");
+        }
         
         return arguments;
     }    
