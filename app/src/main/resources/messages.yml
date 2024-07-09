@@ -123,6 +123,7 @@ messages:
     target_player_bypass: "<dark_grey>[<red>Elemental<dark_grey>] <white>You're not allowed to see the location of <light_purple><target_player><white>."
     location:
       self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your current location is <light_purple><coordinates> <white>on world <light_purple><world><white>."
+      other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Target player <light_purple><target_player><white>'s current location is <light_purple><coordinates> <white>on world <light_purple><world><white>."
   reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
   plugin_info: |-
     <reset>
