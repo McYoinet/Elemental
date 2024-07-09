@@ -40,6 +40,9 @@ commands:
     aliases: [tpdeath, deathtp]
   lastdeath:
     description: Shows the last death coordinates for the specified player.
+  getpos:
+    description: Shows the current coordinates of the specified player.
+    aliases: [getlocation, getcoords]
 
 # Permissions
 permissions:
@@ -67,3 +70,10 @@ permissions:
     default: op
     children:
       elemental.lastdeath.others: true
+  elemental.getpos:
+    description: Shows the current location of the specified player.
+    default: op
+    children:
+      elemental.getpos.others: true
+      elemental.getpos.bypass: true
+      elemental.getpos.ignorebypass: true

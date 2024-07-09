@@ -78,12 +78,12 @@ public class RequestTeleport implements TabExecutor {
             return true;
         } else if(args[0].equalsIgnoreCase("accept")) {
             if(TempData.tpRequests.containsKey(targetPlayer.getName()) && TempData.tpRequests.get(targetPlayer.getName()) == player.getName()) {
-                player.teleport(targetPlayer);
+                targetPlayer.teleport(player);
 
                 TempData.tpRequests.remove(targetPlayer.getName());
                 
-                player.sendMessage(mm.deserialize(messages.getString("messages.request_teleport.request.accepted.sender"), Placeholder.unparsed("target_destination", targetPlayer.getName())));
-                targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.request_teleport.request.accepted.recipient"), Placeholder.unparsed("command_sender", player.getName())));
+                targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.request_teleport.request.accepted.sender"), Placeholder.unparsed("target_destination", player.getName())));
+                player.sendMessage(mm.deserialize(messages.getString("messages.request_teleport.request.accepted.recipient"), Placeholder.unparsed("command_sender", targetPlayer.getName())));
 
                 return true;
             } else {

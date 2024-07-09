@@ -9,6 +9,7 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.commands.Back;
 import net.palenquemc.elemental.commands.Broadcast;
 import net.palenquemc.elemental.commands.Gamemode;
+import net.palenquemc.elemental.commands.Getpos;
 import net.palenquemc.elemental.commands.LastDeath;
 import net.palenquemc.elemental.commands.RandomTeleport;
 import net.palenquemc.elemental.commands.RequestTeleport;
@@ -57,5 +58,6 @@ public class Elemental extends JavaPlugin {
         getCommand("teleportrequest").setExecutor(new RequestTeleport(this));
         getCommand("back").setExecutor(new Back(this));
         getCommand("lastdeath").setExecutor(new LastDeath(this));
+        getCommand("getpos").setExecutor(new Getpos(this));
     }
 }

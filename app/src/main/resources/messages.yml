@@ -113,6 +113,16 @@ messages:
     coordinates:
       self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your last death was on coordinates <light_purple><coordinates> <white>on world <light_purple><world><white>."
       other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Last death of <light_purple><target_player><white> was on coordinates <light_purple><coordinates><white>, on world <light_purple><world><white>."
+  getpos:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/getpos <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/getpos <aqua>Player1
+    location_not_found:
+      self: "<dark_grey>[<red>Elemental<dark_grey>] <white>Your current location couldn't be found."
+      other: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player><white>'s location couldn't be found."
+    target_player_bypass: "<dark_grey>[<red>Elemental<dark_grey>] <white>You're not allowed to see the location of <light_purple><target_player><white>."
+    location:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your current location is <light_purple><coordinates> <white>on world <light_purple><world><white>."
   reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
   plugin_info: |-
     <reset>
