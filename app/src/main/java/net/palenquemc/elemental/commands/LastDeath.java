@@ -74,6 +74,13 @@ public class LastDeath implements TabExecutor {
                 }
 
                 OfflinePlayer targetPlayer = plugin.getServer().getOfflinePlayer(args[0]);
+                
+                if(!targetPlayer.hasPlayedBefore()) {
+                    sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                    
+                    return true;
+                }
+                
                 Location loc = targetPlayer.getLastDeathLocation();
 
                 if(loc == null) {

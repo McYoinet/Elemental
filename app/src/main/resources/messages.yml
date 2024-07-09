@@ -8,7 +8,7 @@ messages:
   unknown_subcommand: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown subcommand."
   executable_from_console: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can only execute this command from the console."
   executable_from_player: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can only execute this command as a player."
-  target_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player> <white>not found."
+  target_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player> <white>was not found."
   server_is_empty: "<dark_grey>[<red>Elemental<dark_grey>] <white>Server is empty."
   path_test:
     usage: |-
