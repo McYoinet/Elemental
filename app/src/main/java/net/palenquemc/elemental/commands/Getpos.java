@@ -50,7 +50,7 @@ public class Getpos implements TabExecutor {
                     return true;
                 }
 
-                String coordinates = Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ());
+                String coordinates = String.format("%.2f", loc.getX()) + ", " + String.format("%.2f", loc.getY()) + ", " + String.format("%.2f", loc.getZ());
                 String world = loc.getWorld().getName();
 
                 sender.sendMessage(mm.deserialize(messages.getString("messages.getpos.location.self"), Placeholder.unparsed("coordinates", coordinates), Placeholder.unparsed("world", world)));
@@ -87,7 +87,7 @@ public class Getpos implements TabExecutor {
                     return true;
                 }
 
-                String coordinates = Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ());
+                String coordinates = String.format("%.2f", loc.getX()) + ", " + String.format("%.2f", loc.getY()) + ", " + String.format("%.2f", loc.getZ());
                 String world = loc.getWorld().getName();
 
                 sender.sendMessage(mm.deserialize(messages.getString("messages.getpos.location.other"), Placeholder.unparsed("coordinates", coordinates), Placeholder.unparsed("world", world), Placeholder.unparsed("target_player", targetPlayer.getName())));
