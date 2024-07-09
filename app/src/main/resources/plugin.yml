@@ -32,6 +32,14 @@ commands:
   rtp:
     description: Teleports a player to another randomly selected player. There must be at least 3 online players.
     aliases: [randomteleport, rtele, rteleport, rmove]
+  teleportrequest:
+    description: Sends a teleportation request to the specified player.
+    aliases: [tpa, telerequest, tprequest, requestteleport]
+  back:
+    description: Teleports the player to their last death location.
+    aliases: [tpdeath, deathtp]
+  lastdeath:
+    description: Shows the last death coordinates for the specified player.
 
 # Permissions
 permissions:
@@ -52,3 +60,10 @@ permissions:
     children:
       elemental.teleport.others: true
       elemental.teleport.random: true
+      elemental.teleport.request: true
+      elemental.teleport.back: true
+  elemental.lastdeath:
+    description: Shows the last death coordinates of the sender or the specified player.
+    default: op
+    children:
+      elemental.lastdeath.others: true
