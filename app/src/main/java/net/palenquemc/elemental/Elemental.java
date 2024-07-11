@@ -13,10 +13,14 @@ import net.palenquemc.elemental.commands.Getpos;
 import net.palenquemc.elemental.commands.LastDeath;
 import net.palenquemc.elemental.commands.RandomTeleport;
 import net.palenquemc.elemental.commands.RequestTeleport;
+import net.palenquemc.elemental.commands.SetSpawn;
+import net.palenquemc.elemental.commands.Spawn;
 import net.palenquemc.elemental.commands.Teleport;
 import net.palenquemc.elemental.commands.WorldCommand;
 import net.palenquemc.elemental.commands.maincommand.ElementalCommand;
 import net.palenquemc.elemental.config.ConfigurationManager;
+import net.palenquemc.elemental.events.PlayerJoinListener;
+import net.palenquemc.elemental.events.PlayerSpawnLocationListener;
 
 public class Elemental extends JavaPlugin {
     MiniMessage mm = MiniMessage.miniMessage();
@@ -37,6 +41,7 @@ public class Elemental extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Plugin enabled on <light_purple>v<version><white>.", Placeholder.parsed("prefix", internalPrefix), Placeholder.unparsed("version", version)));
         Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Developed by <aqua><author><white>.", Placeholder.parsed("prefix", internalPrefix), Placeholder.unparsed("author", author)));
         
+        registerEvents();
         registerCommands();
         
         config.loadConfigurations();
@@ -59,5 +64,12 @@ public class Elemental extends JavaPlugin {
         getCommand("back").setExecutor(new Back(this));
         getCommand("lastdeath").setExecutor(new LastDeath(this));
         getCommand("getpos").setExecutor(new Getpos(this));
+        getCommand("setspawn").setExecutor(new SetSpawn(this));
+        getCommand("spawn").setExecutor(new Spawn(this));
+    }
+
+    private void registerEvents() {
+        getServer().getPluginManager().registerEvents(new PlayerSpawnLocationListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
     }
 }

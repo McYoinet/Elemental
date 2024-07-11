@@ -43,6 +43,10 @@ commands:
   getpos:
     description: Shows the current coordinates of the specified player.
     aliases: [getlocation, getcoords]
+  setspawn:
+    description: Sets the spawnpoint of the server.
+  spawn:
+    description: Teleports the player to the spawnpoint.
 
 # Permissions
 permissions:
@@ -77,3 +81,9 @@ permissions:
       elemental.getpos.others: true
       elemental.getpos.bypass: true
       elemental.getpos.ignorebypass: true
+  elemental.setspawn:
+    description: Sets the spawn location for the server.
+    default: op
+  elemental.spawn:
+    description: Teleports the player to the spawnpoint.
+    default: op

@@ -26,6 +26,7 @@ public class ConfigurationManager {
 
     public void loadConfigurations() {
         configs.put("messages.yml", new YamlConfiguration());
+        configs.put("config.yml", new YamlConfiguration());
 
         configs.forEach((filename, config) -> {
             File file = new File(plugin.getDataFolder(), filename);
