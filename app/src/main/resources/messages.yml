@@ -166,7 +166,8 @@ messages:
         pitch: 1f
         scope: world
         blacklisted_worlds: []
-  player_leave:
+  player_quit:
+    invalid_scope: "<dark_grey>[<red>Elemental<dark_grey>] <white>Invalid scope used on <light_purple><path><white>. Use either <light_purple>global <white>or <light_purple>world<white>."
     actions:
       server_message:
         enable: true

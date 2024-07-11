@@ -20,6 +20,7 @@ import net.palenquemc.elemental.commands.WorldCommand;
 import net.palenquemc.elemental.commands.maincommand.ElementalCommand;
 import net.palenquemc.elemental.config.ConfigurationManager;
 import net.palenquemc.elemental.events.PlayerJoinListener;
+import net.palenquemc.elemental.events.PlayerQuitListener;
 import net.palenquemc.elemental.events.PlayerSpawnLocationListener;
 
 public class Elemental extends JavaPlugin {
@@ -71,5 +72,6 @@ public class Elemental extends JavaPlugin {
     private void registerEvents() {
         getServer().getPluginManager().registerEvents(new PlayerSpawnLocationListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
     }
 }
