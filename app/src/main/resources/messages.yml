@@ -195,6 +195,32 @@ messages:
     self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your inventory was cleared."
     to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s inventory was cleared."
     by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has cleared your inventory."
+  feed:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/feed <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/feed <aqua>Player1
+    self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You've been fed."
+    to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> has been fed."
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has fed you."
+  feed:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/heal <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/heal <aqua>Player1
+    self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You've been healed."
+    to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> has been healed."
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has healed you."
+  fly:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/fly <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/fly <aqua>Player1
+    enable:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your flight mode was enabled."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s flight mode was enabled."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>enabled your flight mode."
+    disable:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your flight mode was disabled."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s flight mode was disabled."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>disabled your flight mode."
   reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
   plugin_info: |-
     <reset>

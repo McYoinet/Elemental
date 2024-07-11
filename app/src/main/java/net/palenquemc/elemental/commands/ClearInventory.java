@@ -91,5 +91,5 @@ public class ClearInventory implements TabExecutor {
         }
 
         return arguments;
-    }    
+    }
 }

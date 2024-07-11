@@ -49,6 +49,12 @@ commands:
     description: Teleports the player to the spawnpoint.
   clearinventory:
     description: Clears the inventory of a player.
+  feed:
+    description: Sets the food level of a player to the maximum.
+  heal:
+    description: Sets the health of a player to the maximum.
+  fly:
+    description: Toggles the flight mode of a player.
 
 # Permissions
 permissions:
@@ -94,3 +100,18 @@ permissions:
     default: op
     children:
       elemental.clearinventory.others: true
+  elemental.feed:
+    description: Sets the food level of a player to the maximum.
+    default: op
+    children:
+      elemental.feed.others: true
+  elemental.heal:
+    description: Sets the health level of a player to the maximum.
+    default: op
+    children:
+      elemental.heal.others: true
+  elemental.fly:
+    description: Toggles the flight mode of a player.
+    default: op
+    children:
+      elemental.fly.others: true
