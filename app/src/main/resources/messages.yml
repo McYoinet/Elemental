@@ -194,7 +194,7 @@ messages:
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/clearinventory <aqua>Player1
     self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your inventory was cleared."
     to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s inventory was cleared."
-    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has cleared your inventory.
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has cleared your inventory."
   reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
   plugin_info: |-
     <reset>
