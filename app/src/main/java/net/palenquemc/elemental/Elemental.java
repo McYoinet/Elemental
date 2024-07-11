@@ -8,6 +8,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.commands.Back;
 import net.palenquemc.elemental.commands.Broadcast;
+import net.palenquemc.elemental.commands.ClearInventory;
 import net.palenquemc.elemental.commands.Gamemode;
 import net.palenquemc.elemental.commands.Getpos;
 import net.palenquemc.elemental.commands.LastDeath;
@@ -67,6 +68,7 @@ public class Elemental extends JavaPlugin {
         getCommand("getpos").setExecutor(new Getpos(this));
         getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new Spawn(this));
+        getCommand("clearinventory").setExecutor(new ClearInventory(this));
     }
 
     private void registerEvents() {

@@ -47,6 +47,8 @@ commands:
     description: Sets the spawnpoint of the server.
   spawn:
     description: Teleports the player to the spawnpoint.
+  clearinventory:
+    description: Clears the inventory of a player.
 
 # Permissions
 permissions:
@@ -87,3 +89,8 @@ permissions:
   elemental.spawn:
     description: Teleports the player to the spawnpoint.
     default: op
+  elemental.clearinventory:
+    description: Allows a player to clear inventories, their own or those belonging to other players.
+    default: op
+    children:
+      elemental.clearinventory.others: true
