@@ -1,6 +1,5 @@
 package net.palenquemc.elemental.commands;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,18 +65,15 @@ public class SetSpawn implements TabExecutor {
                 config.set("config.spawn.location.yaw", yaw);
                 config.set("config.spawn.location.pitch", pitch);
 
-                try {
-                    config.save("config.yml");
+                plugin.config.saveConfigs();
 
-                    plugin.config.reloadConfig();
+                plugin.config.reloadConfig();
                 
-                    String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
+                String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
 
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+                
+                return true;
             }
 
             case 3 -> {
@@ -104,18 +100,15 @@ public class SetSpawn implements TabExecutor {
                 config.set("config.spawn.location.yaw", 180);
                 config.set("config.spawn.location.pitch", 0);
 
-                try {
-                    config.save("config.yml");
+                plugin.config.saveConfigs();
 
-                    plugin.config.reloadConfig();
-                
-                    String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
+                plugin.config.reloadConfig();
 
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
+
+                sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+
+                return true;
             }
 
             case 4 -> {
@@ -134,26 +127,23 @@ public class SetSpawn implements TabExecutor {
                 config.set("config.spawn.location.yaw", 180);
                 config.set("config.spawn.location.pitch", 0);
 
-                try {
-                    config.save("config.yml");
+                plugin.config.saveConfigs();
 
-                    plugin.config.reloadConfig();
-                
-                    String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
+                plugin.config.reloadConfig();
 
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
+
+                sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+
+                return true;
             }
 
             default -> {
                 sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.usage")));
+            
+                return true;
             }
         }
-
-        return true;
     }
 
     @Override

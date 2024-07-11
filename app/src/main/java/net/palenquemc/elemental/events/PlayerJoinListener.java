@@ -40,6 +40,8 @@ public class PlayerJoinListener implements Listener {
 
         // Server message
         if(messages.getBoolean("messages.spawn.actions.server_message.enable")) {
+            event.joinMessage(null);
+
             switch(messages.getString("messages.spawn.actions.server_message.scope")) {
                 case "world" -> {
                     player.getWorld().sendMessage(mm.deserialize(messages.getString("messages.spawn.actions.server_message.text"), Placeholder.unparsed("player", player.getName())));

@@ -166,6 +166,27 @@ messages:
         pitch: 1f
         scope: world
         blacklisted_worlds: []
+  player_leave:
+    actions:
+      server_message:
+        enable: true
+        text: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><player><white> has left the server."
+        scope: world
+        blacklisted_worlds: []
+      server_title:
+        enable: false
+        main_title: "Player <light_purple><player><white> has left the server"
+        subtitle: "Say goodbye!"
+        scope: world
+        blacklisted_worlds: []
+      server_sound:
+        enable: true
+        source: "BLOCK"
+        key: "block.note_block.pling"
+        volume: 1f
+        pitch: 1f
+        scope: world
+        blacklisted_worlds: []
   reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
   plugin_info: |-
     <reset>

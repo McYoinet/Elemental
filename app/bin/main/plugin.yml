@@ -1,0 +1,89 @@
+# Main information
+name: Elemental
+version: 0.0.1-BETA
+main: net.palenquemc.elemental.Elemental
+
+# Complementary information
+api-version: '1.20.6'
+description: Plugin with elemental features.
+
+loadbefore: [CommandWhitelist]
+
+# Contact information
+author: McYoinet
+website: https://plugins.palenquemc.net/Elemental
+
+# Commands
+commands:
+  elemental:
+    description: Main command of the plugin. Shows general information about it.
+  broadcast:
+    description: Broadcasts a message to all players in the server.
+    aliases: [bc, announce]
+  gamemode:
+    description: Set a player's gamemode.
+    aliases: [gm, gmode, mode]
+  teleport:
+    description: Teleports a player to the specified location.
+    aliases: [tp, tele, move]
+  world:
+    description: Teleports a player to the specified world
+    aliases: [changeworld, moveworld]
+  rtp:
+    description: Teleports a player to another randomly selected player. There must be at least 3 online players.
+    aliases: [randomteleport, rtele, rteleport, rmove]
+  teleportrequest:
+    description: Sends a teleportation request to the specified player.
+    aliases: [tpa, telerequest, tprequest, requestteleport]
+  back:
+    description: Teleports the player to their last death location.
+    aliases: [tpdeath, deathtp]
+  lastdeath:
+    description: Shows the last death coordinates for the specified player.
+  getpos:
+    description: Shows the current coordinates of the specified player.
+    aliases: [getlocation, getcoords]
+  setspawn:
+    description: Sets the spawnpoint of the server.
+  spawn:
+    description: Teleports the player to the spawnpoint.
+
+# Permissions
+permissions:
+  elemental.plugininfo:
+    description: Allows the usage of /elemental
+    default: op
+  elemental.broadcast:
+    description: Allows the usage of /broadcast
+    default: op
+  elemental.gamemode:
+    description: Allows the usage of /gamemode
+    default: op
+    children:
+      elemental.gamemode.others: true
+  elemental.teleport:
+    description: Allows the usage of /teleport and related commands
+    default: op
+    children:
+      elemental.teleport.others: true
+      elemental.teleport.random: true
+      elemental.teleport.request: true
+      elemental.teleport.back: true
+  elemental.lastdeath:
+    description: Shows the last death coordinates of the sender or the specified player.
+    default: op
+    children:
+      elemental.lastdeath.others: true
+  elemental.getpos:
+    description: Shows the current location of the specified player.
+    default: op
+    children:
+      elemental.getpos.others: true
+      elemental.getpos.bypass: true
+      elemental.getpos.ignorebypass: true
+  elemental.setspawn:
+    description: Sets the spawn location for the server.
+    default: op
+  elemental.spawn:
+    description: Teleports the player to the spawnpoint.
+    default: op

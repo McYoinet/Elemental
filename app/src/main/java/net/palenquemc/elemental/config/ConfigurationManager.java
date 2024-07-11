@@ -74,4 +74,15 @@ public class ConfigurationManager {
     public HashMap<String, FileConfiguration> getConfigHashMap() {
         return configs;
     }
+
+    public void saveConfigs() {
+        configs.forEach((filename, config) -> {
+            try {
+                config.save(new File(plugin.getDataFolder(), filename));
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
+    }
 }
