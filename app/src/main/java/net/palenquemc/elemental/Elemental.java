@@ -10,6 +10,7 @@ import net.palenquemc.elemental.commands.Back;
 import net.palenquemc.elemental.commands.Broadcast;
 import net.palenquemc.elemental.commands.ClearInventory;
 import net.palenquemc.elemental.commands.Feed;
+import net.palenquemc.elemental.commands.Fly;
 import net.palenquemc.elemental.commands.Gamemode;
 import net.palenquemc.elemental.commands.Getpos;
 import net.palenquemc.elemental.commands.Heal;
@@ -73,6 +74,7 @@ public class Elemental extends JavaPlugin {
         getCommand("clearinventory").setExecutor(new ClearInventory(this));
         getCommand("feed").setExecutor(new Feed(this));
         getCommand("heal").setExecutor(new Heal(this));
+        getCommand("fly").setExecutor(new Fly(this));
     }
 
     private void registerEvents() {

@@ -7,7 +7,7 @@ main: net.palenquemc.elemental.Elemental
 api-version: '1.20.6'
 description: Plugin with elemental features.
 
-loadbefore: [CommandWhitelist]
+loadbefore: [FastAsyncWorldEdit, WorldEdit]
 
 # Contact information
 author: McYoinet

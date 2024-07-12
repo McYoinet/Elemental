@@ -45,13 +45,13 @@ public class Fly implements TabExecutor {
                 if(player.getAllowFlight()) {
                     player.setAllowFlight(false);
 
-                    player.sendMessage(mm.deserialize(messages.getString("messages.fly.enable.self")));
+                    player.sendMessage(mm.deserialize(messages.getString("messages.fly.disable.self")));
 
                     return true;
                 } else {
                     player.setAllowFlight(true);
 
-                    player.sendMessage(mm.deserialize(messages.getString("messages.fly.disable.self")));
+                    player.sendMessage(mm.deserialize(messages.getString("messages.fly.enable.self")));
                 
                     return true;
                 }
@@ -75,15 +75,15 @@ public class Fly implements TabExecutor {
                 if(targetPlayer.getAllowFlight()) {
                     targetPlayer.setAllowFlight(false);
 
-                    targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.fly.enable.by_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.fly.enable.to_other"), Placeholder.unparsed("command_sender", sender.getName())));
+                    targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.fly.disable.by_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
+                    sender.sendMessage(mm.deserialize(messages.getString("messages.fly.disable.to_other"), Placeholder.unparsed("command_sender", sender.getName())));
 
                     return true;
                 } else {
-                    targetPlayer.setAllowFlight(false);
+                    targetPlayer.setAllowFlight(true);
 
-                    targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.fly.disable.by_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.fly.disable.to_other"), Placeholder.unparsed("command_sender", sender.getName())));
+                    targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.fly.enable.by_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
+                    sender.sendMessage(mm.deserialize(messages.getString("messages.fly.enable.to_other"), Placeholder.unparsed("command_sender", sender.getName())));
 
                     return true;
                 }

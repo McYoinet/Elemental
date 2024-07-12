@@ -202,7 +202,7 @@ messages:
     self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You've been fed."
     to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> has been fed."
     by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has fed you."
-  feed:
+  heal:
     usage: |-
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/heal <aqua>[player]
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/heal <aqua>Player1
