@@ -27,39 +27,40 @@ public class Broadcast implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration serverControl = plugin.config.getConfig("server_control.yml");
 
         if(!sender.hasPermission("elmental.broadcast")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
             
             return true;
         }
 
         if(args.length < 1) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.broadcast.missing_message")));
+            sender.sendMessage(mm.deserialize(serverControl.getString("server_control_module.broadcast.missing_message")));
 
             return true;
         }
 
         String message = String.join(" ", args);
 
-        plugin.getServer().sendMessage(mm.deserialize(messages.getString("messages.broadcast.broadcast"), Placeholder.parsed("message", message)));
+        plugin.getServer().sendMessage(mm.deserialize(serverControl.getString("server_control_module.broadcast.broadcast"), Placeholder.parsed("message", message)));
 
-        if(messages.getBoolean("messages.broadcast.sound.enable")) {
-            String source = messages.getString("messages.broadcast.sound.source");
-            String key = messages.getString("messages.broadcast.sound.key");
+        if(core.getBoolean("server_control_module.broadcast.sound.enable")) {
+            String source = core.getString("server_control_module.broadcast.sound.source");
+            String key = core.getString("server_control_module.broadcast.sound.key");
 
-            float volume = Float.parseFloat(messages.getString("messages.broadcast.sound.volume"));
-            float pitch = Float.parseFloat(messages.getString("messages.broadcast.sound.pitch"));
+            float volume = Float.parseFloat(core.getString("server_control_module.broadcast.sound.volume"));
+            float pitch = Float.parseFloat(core.getString("server_control_module.broadcast.sound.pitch"));
 
             Sound sound = Sound.sound(Key.key(key), Sound.Source.valueOf(source), volume, pitch);
             
             plugin.getServer().playSound(sound);
         }
 
-        if(messages.getBoolean("messages.broadcast.title.enable")) {
-            Component mainTitle = mm.deserialize(messages.getString("messages.broadcast.title.main_title"), Placeholder.parsed("message", message));
-            Component subtitle = mm.deserialize(messages.getString("messages.broadcast.title.subtitle"), Placeholder.parsed("message", message));
+        if(core.getBoolean("server_control_module.broadcast.title.enable")) {
+            Component mainTitle = mm.deserialize(core.getString("server_control_module.broadcast.title.main_title"), Placeholder.parsed("message", message));
+            Component subtitle = mm.deserialize(core.getString("server_control_module.broadcast.title.subtitle"), Placeholder.parsed("message", message));
 
             Title title = Title.title(mainTitle, subtitle);
 

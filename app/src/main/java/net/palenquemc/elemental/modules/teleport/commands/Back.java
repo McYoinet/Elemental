@@ -25,16 +25,17 @@ public class Back implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
         if(!sender.hasPermission("elemental.teleport.back")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
             
             return true;
         }
 
         if(!(sender instanceof Player)) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+            sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
 
             return true;
         }
@@ -42,7 +43,7 @@ public class Back implements TabExecutor {
         Player player = (Player) sender;
 
         if(args.length > 0) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.back.usage")));
+            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.back.usage")));
 
             return true;
         }
@@ -50,13 +51,13 @@ public class Back implements TabExecutor {
         Location loc = player.getLastDeathLocation();
 
         if(loc == null) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.back.no_deaths_found")));
+            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.back.no_deaths_found")));
 
             return true;
         }
 
         if(loc.getWorld() == null) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.back.world_not_found")));
+            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.back.world_not_found")));
 
             return true;
         }
@@ -66,7 +67,7 @@ public class Back implements TabExecutor {
 
         player.teleport(loc);
 
-        player.sendMessage(mm.deserialize(messages.getString("messages.back.teleported"), Placeholder.unparsed("target_destination", targetDestination), Placeholder.unparsed("world", world)));
+        player.sendMessage(mm.deserialize(teleport.getString("teleport_module.back.teleported"), Placeholder.unparsed("target_destination", targetDestination), Placeholder.unparsed("world", world)));
 
         return true;
     }

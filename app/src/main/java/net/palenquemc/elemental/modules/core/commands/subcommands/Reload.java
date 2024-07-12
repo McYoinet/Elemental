@@ -31,16 +31,16 @@ public class Reload implements SubcommandTemplate {
 
     @Override
     public boolean execute(CommandSender sender, Command command, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
 
         if(!sender.hasPermission(permission())) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
 
             return false;
         }
 
         boolean result = plugin.config.reloadConfig();
-        sender.sendMessage(mm.deserialize(messages.getString("messages.reloaded")));
+        sender.sendMessage(mm.deserialize(core.getString("core.plugin_reloaded")));
 
         return result;
     }

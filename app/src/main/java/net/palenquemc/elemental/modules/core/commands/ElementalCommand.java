@@ -33,16 +33,16 @@ public class ElementalCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
 
         if(args.length == 0) {
             if(!sender.hasPermission("elemental.plugininfo")) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+                sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
                 
                 return false;
             }
 
-            sender.sendMessage(mm.deserialize(messages.getString("messages.plugin_info"), Placeholder.unparsed("version", plugin.version)));
+            sender.sendMessage(mm.deserialize(core.getString("core.plugin_info"), Placeholder.unparsed("version", plugin.version)));
             
             return true;
         } else if(args.length >= 1 && subcommands.containsKey(args[0])){
@@ -50,7 +50,7 @@ public class ElementalCommand implements TabExecutor {
             
             return result;
         } else {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.unknown_subcommand")));
+            sender.sendMessage(mm.deserialize(core.getString("core.unknown_subcommand")));
             return false;
         }
     }

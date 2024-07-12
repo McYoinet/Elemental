@@ -1,0 +1,61 @@
+teleport_module:
+  teleport:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/teleport <aqua><player> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/teleport <aqua>Player1
+    invalid_location: "<dark_grey>[<red>Elemental<dark_grey>] <white>Specify a valid set of coordinates."
+    cannot_teleport_to_self: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can't teleport to yourself."
+    teleported:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to <light_purple><target_destination><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was teleported to <light_purple><target_destination><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to <light_purple><target_destination> <white>by <light_purple><command_sender><white>."
+      all: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Everyone was teleported to <light_purple><target_destination><white>."
+  
+  random_teleport:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/rtp <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/rtp <aqua>Player1
+    not_enough_players: "<dark_grey>[<red>Elemental<dark_grey>] <white>There are not enough players to execute this command."
+    teleported:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were randomly teleported to <light_purple><target_destination><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was randomly teleported to <light_purple><target_destination><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were randomly teleported to <light_purple><target_destination> <white>by <light_purple><command_sender><white>."
+      all: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Everyone was randomly teleported to <light_purple><target_destination><white>."
+  
+  request_teleport:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/tpa <aqua><send | accept | deny | cancel> <player>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/tpa <aqua>send Player1
+    cannot_request_to_self: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can't send a teleportation request to yourself."
+    request:
+      sent: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You sent a teleportation request to <light_purple><target_destination><white>."
+      received: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You received a teleportation request from <light_purple><command_sender><white>."
+      not_found:
+        sender: "<dark_grey>[<red>Elemental<dark_grey>] <white>You have not sent a teleportation request to <light_purple><target_destination><white>."
+        recipient: "<dark_grey>[<red>Elemental<dark_grey>] <white>You don't have a teleportation request from <light_purple><command_sender><white>."
+      accepted:
+        recipient: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You accepted the teleportation request from <light_purple><command_sender><white>."
+        sender: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><target_destination><white> accepted your teleportation request."
+      denied:
+        recipient: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You denied the teleportation request from <light_purple><command_sender><white>."
+        sender: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><target_destination><white> denied your teleportation request."
+      cancelled:
+        recipient: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender><white> has cancelled their teleportation request."
+        sender: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You cancelled the teleportation request to <light_purple><target_destination><white>."
+  
+  back:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/back
+    teleported: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to your last death, on coordinates <light_purple><target_destination><white> on world <light_purple><world><white>."
+    world_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>The world your last death occurred on couldn't be found."
+    no_deaths_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>You haven't died yet."
+  
+  world:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/world <aqua><world> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/world <aqua>MyWorld Player1
+    world_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target world <light_purple><world> <white>not found."
+    world_changed:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the world <light_purple><world><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was teleported to world <light_purple><world><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the world <light_purple><world> <white>by <light_purple><command_sender><white>."

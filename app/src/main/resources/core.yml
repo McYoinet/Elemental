@@ -1,0 +1,36 @@
+core_module:
+  insufficient_permissions: "<dark_grey>[<red>Elemental<dark_grey>] <white>Insufficient permissions."
+  unknown_subcommand: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown subcommand."
+  executable_from_console: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can only execute this command from the console."
+  executable_from_player: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can only execute this command as a player."
+  target_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player> <white>was not found."
+  server_is_empty: "<dark_grey>[<red>Elemental<dark_grey>] <white>Server is empty."
+  plugin_reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
+  
+  path_test:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/elemental pathtest <aqua><path>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/elemental pathtest <aqua>messages.insufficient_permissions
+    file_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>File <light_purple><file> <white>not found."
+    path_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Path <light_purple><path> <white>in file <light_purple><file> <white>not found."
+    path_found: |-
+      <reset>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Showing value stored in <light_purple><path><white> of <light_purple><file><white>:
+      <reset>
+      <path_value>
+  
+  plugin_info: |-
+    <reset>
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Developed by <light_purple>McYoinet<white> on version <light_purple><version><white>.
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Use <dark_aqua>/elemental help<white> to get a list of commands.
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Get support on the Discord server: <blue>https://discord.gg/fkmKSXUBZ4
+    <reset>
+
+  plugin_help: |-
+    <reset>
+    <dark_grey> ➤ <white>Showing help page of <#00e580>Elemental <light_purple>v<version><white>.
+    <dark_grey> ▸ <dark_aqua>/elemental <grey>➝ <white>Shows general plugin information.
+    <dark_grey> ▸ <dark_aqua>/elemental help <grey>➝ <white>Shows this information page.
+    <dark_grey> ▸ <dark_aqua>/elemental pathtest <aqua><file> <path> <grey>➝ <white>Prints the value stored in the specified path of the chosen file - Must be in valid YAML notation.
+    <dark_grey> ▸ <dark_aqua>/elemental reload ➝ <white>Reloads the configuration files of the plugin.
+    <reset>

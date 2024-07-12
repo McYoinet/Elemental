@@ -1,0 +1,14 @@
+server_control_module:
+  broadcast:
+    missing_message: "<dark_grey>[<red>Elemental<dark_grey>] <white>You must specify a message to broadcast."
+    broadcast: "<dark_grey>[<#00e580>Broadcast<dark_grey>] <white><message>"
+    sound:
+      enable: true
+      source: "BLOCK"
+      key: "block.note_block.pling"
+      volume: 1f
+      pitch: 1f
+    title:
+      enable: false
+      main_title: "<message>"
+      subtitle: "This is a broadcast"

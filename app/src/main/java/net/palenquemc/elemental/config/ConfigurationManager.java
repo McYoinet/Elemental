@@ -25,8 +25,12 @@ public class ConfigurationManager {
     MiniMessage mm = MiniMessage.miniMessage();
 
     public void loadConfigurations() {
-        configs.put("messages.yml", new YamlConfiguration());
-        configs.put("config.yml", new YamlConfiguration());
+        configs.put("core.yml", new YamlConfiguration());
+        configs.put("modules.yml", new YamlConfiguration());
+        configs.put("player_control.yml", new YamlConfiguration());
+        configs.put("server_control.yml", new YamlConfiguration());
+        configs.put("spawn.yml", new YamlConfiguration());
+        configs.put("teleport.yml", new YamlConfiguration());
 
         configs.forEach((filename, config) -> {
             File file = new File(plugin.getDataFolder(), filename);

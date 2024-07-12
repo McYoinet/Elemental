@@ -1,0 +1,74 @@
+player_control_module:
+  gamemode:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/gamemode <aqua><gamemode> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/gamemode <aqua>creative Player
+    unknown_gamemode: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown gamemode."
+    set:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your gamemode was set to <light_purple><gamemode><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Target player <light_purple><target_player>'s<white> gamemode was set to <light_purple><gamemode><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your gamemode was set to <light_purple><gamemode><white> by <light_purple><command_sender><white>."
+      all: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Set everyone's gamemode to <light_purple><gamemode><white>."
+  
+  lastdeath:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/lastdeath <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/lastdeath <aqua>Player1
+    no_deaths_found: 
+      self: "<dark_grey>[<red>Elemental<dark_grey>] <white>You haven't died yet."
+      other: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player> <white>hasn't died yet."
+    world_not_found:
+      self: "<dark_grey>[<red>Elemental<dark_grey>] <white>The world your last death occurred on couldn't be found."
+      other: "<dark_grey>[<red>Elemental<dark_grey>] <white>The world where <light_purple><target_player><white>'s last death occurred couldn't be found."
+    coordinates:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your last death was on coordinates <light_purple><coordinates> <white>on world <light_purple><world><white>."
+      other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Last death of <light_purple><target_player><white> was on coordinates <light_purple><coordinates><white>, on world <light_purple><world><white>."
+  
+  getpos:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/getpos <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/getpos <aqua>Player1
+    location_not_found:
+      self: "<dark_grey>[<red>Elemental<dark_grey>] <white>Your current location couldn't be found."
+      other: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player><white>'s location couldn't be found."
+    target_player_bypass: "<dark_grey>[<red>Elemental<dark_grey>] <white>You're not allowed to see the location of <light_purple><target_player><white>."
+    location:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your current location is <light_purple><coordinates> <white>on world <light_purple><world><white>."
+      other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Target player <light_purple><target_player><white>'s current location is <light_purple><coordinates> <white>on world <light_purple><world><white>."
+  
+  clear_inventory:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/clearinventory <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/clearinventory <aqua>Player1
+    self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your inventory was cleared."
+    to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s inventory was cleared."
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has cleared your inventory."
+  
+  feed:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/feed <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/feed <aqua>Player1
+    self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You've been fed."
+    to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> has been fed."
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has fed you."
+  
+  heal:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/heal <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/heal <aqua>Player1
+    self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You've been healed."
+    to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> has been healed."
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has healed you."
+  
+  fly:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/fly <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/fly <aqua>Player1
+    enable:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your flight mode was enabled."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s flight mode was enabled."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>enabled your flight mode."
+    disable:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your flight mode was disabled."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s flight mode was disabled."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>disabled your flight mode."

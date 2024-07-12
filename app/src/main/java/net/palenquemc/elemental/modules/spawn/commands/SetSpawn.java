@@ -26,11 +26,11 @@ public class SetSpawn implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
-        FileConfiguration config = plugin.config.getConfig("config.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
         if(!sender.hasPermission("elmental.setspawn")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
             
             return true;
         }
@@ -38,7 +38,7 @@ public class SetSpawn implements TabExecutor {
         switch (args.length) {
             case 0 -> {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
                     
                     return true;
                 }
@@ -56,14 +56,14 @@ public class SetSpawn implements TabExecutor {
                 float yaw = loc.getYaw();
                 float pitch = loc.getPitch();
 
-                config.set("config.spawn.location.world", worldname);
+                spawn.set("spawn_module.spawn.location.world", worldname);
 
-                config.set("config.spawn.location.pos_x", x);
-                config.set("config.spawn.location.pos_y", y);
-                config.set("config.spawn.location.pos_z", z);
-
-                config.set("config.spawn.location.yaw", yaw);
-                config.set("config.spawn.location.pitch", pitch);
+                spawn.set("spawn_module.spawn.location.pos_x", x);
+                spawn.set("spawn_module.spawn.location.pos_y", y);
+                spawn.set("spawn_module.spawn.location.pos_z", z);
+                
+                spawn.set("spawn_module.spawn.location.yaw", yaw);
+                spawn.set("spawn_module.spawn.location.pitch", pitch);
 
                 plugin.config.saveConfigs();
 
@@ -71,14 +71,14 @@ public class SetSpawn implements TabExecutor {
                 
                 String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
 
-                sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+                sender.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
                 
                 return true;
             }
 
             case 3 -> {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
                     
                     return true;
                 }
@@ -91,14 +91,12 @@ public class SetSpawn implements TabExecutor {
                 Double y = Double.parseDouble(args[1]);
                 Double z = Double.parseDouble(args[2]);
 
-                config.set("config.spawn.location.world", worldname);
-
-                config.set("config.spawn.location.pos_x", x);
-                config.set("config.spawn.location.pos_y", y);
-                config.set("config.spawn.location.pos_z", z);
-
-                config.set("config.spawn.location.yaw", 180);
-                config.set("config.spawn.location.pitch", 0);
+                spawn.set("spawn_module.spawn.location.pos_x", x);
+                spawn.set("spawn_module.spawn.location.pos_y", y);
+                spawn.set("spawn_module.spawn.location.pos_z", z);
+                
+                spawn.set("spawn_module.spawn.location.yaw", 180);
+                spawn.set("spawn_module.spawn.location.pitch", 0);
 
                 plugin.config.saveConfigs();
 
@@ -106,7 +104,7 @@ public class SetSpawn implements TabExecutor {
 
                 String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
 
-                sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+                sender.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
 
                 return true;
             }
@@ -118,14 +116,14 @@ public class SetSpawn implements TabExecutor {
                 Double y = Double.parseDouble(args[1]);
                 Double z = Double.parseDouble(args[2]);
 
-                config.set("config.spawn.location.world", worldname);
+                spawn.set("spawn_module.spawn.location.world", worldname);
 
-                config.set("config.spawn.location.pos_x", x);
-                config.set("config.spawn.location.pos_y", y);
-                config.set("config.spawn.location.pos_z", z);
-
-                config.set("config.spawn.location.yaw", 180);
-                config.set("config.spawn.location.pitch", 0);
+                spawn.set("spawn_module.spawn.location.pos_x", x);
+                spawn.set("spawn_module.spawn.location.pos_y", y);
+                spawn.set("spawn_module.spawn.location.pos_z", z);
+                
+                spawn.set("spawn_module.spawn.location.yaw", 180);
+                spawn.set("spawn_module.spawn.location.pitch", 0);
 
                 plugin.config.saveConfigs();
 
@@ -133,13 +131,13 @@ public class SetSpawn implements TabExecutor {
 
                 String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
 
-                sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+                sender.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
 
                 return true;
             }
 
             default -> {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.setspawn.usage")));
+                sender.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.setspawn.usage")));
             
                 return true;
             }

@@ -25,16 +25,17 @@ public class WorldCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
         if(!sender.hasPermission("elemental.teleport")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
             
             return true;
         }
 
         if(args.length < 1) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.world.usage")));
+            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.usage")));
             
             return true;
         }
@@ -44,14 +45,14 @@ public class WorldCommand implements TabExecutor {
             World world = plugin.getServer().getWorld(worldname);
 
             if(plugin.getServer().getWorld(worldname) == null) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.world.world_not_found"), Placeholder.unparsed("world", worldname)));
+                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_not_found"), Placeholder.unparsed("world", worldname)));
 
                 return true;
             }
             
             if(args.length == 1) {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
     
                     return true;
                 }
@@ -59,10 +60,10 @@ public class WorldCommand implements TabExecutor {
                 Player player = (Player) sender;
     
                 player.teleport(world.getSpawnLocation());
-                sender.sendMessage(mm.deserialize(messages.getString("messages.world.world_changed.self"), Placeholder.unparsed("world", worldname)));
+                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_changed.self"), Placeholder.unparsed("world", worldname)));
             } else if(args.length == 2) {
                 if(!sender.hasPermission("elemental.teleport.others")) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
     
                     return true;
                 }
@@ -70,19 +71,19 @@ public class WorldCommand implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[1]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[1])));
+                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[1])));
                     
                     return true;
                 }
 
                 targetPlayer.teleport(world.getSpawnLocation());
                 
-                sender.sendMessage(mm.deserialize(messages.getString("messages.world.world_changed.to_other"), Placeholder.unparsed("target_player", args[1]), Placeholder.unparsed("world", args[0])));
-                targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.world.world_changed.by_other"), Placeholder.unparsed("world", worldname), Placeholder.unparsed("command_sender", sender.getName())));
+                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_changed.to_other"), Placeholder.unparsed("target_player", args[1]), Placeholder.unparsed("world", args[0])));
+                targetPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_changed.by_other"), Placeholder.unparsed("world", worldname), Placeholder.unparsed("command_sender", sender.getName())));
 
                 return true;
             } else if(args.length > 2) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.world.usage")));
+                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.usage")));
 
                 return true;
             }

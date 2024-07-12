@@ -24,10 +24,11 @@ public class Feed implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
         if(!sender.hasPermission("elmental.feed")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
             
             return true;
         }
@@ -35,7 +36,7 @@ public class Feed implements TabExecutor {
         switch(args.length) {
             case 0 -> {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
 
                     return true;
                 }
@@ -44,7 +45,7 @@ public class Feed implements TabExecutor {
 
                 player.setFoodLevel(20);
 
-                player.sendMessage(mm.deserialize(messages.getString("messages.feed.self")));
+                player.sendMessage(mm.deserialize(playerControl.getString("player_control_module.feed.self")));
 
                 return true;
             }
@@ -53,27 +54,27 @@ public class Feed implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found")));
 
                     return true;
                 }
 
                 if(!sender.hasPermission("elemental.feed.others")) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
                     
                     return true;
                 }
 
                 targetPlayer.setFoodLevel(20);
 
-                targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.feed.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
-                sender.sendMessage(mm.deserialize(messages.getString("messages.feed.by_other"), Placeholder.unparsed("command_sender", sender.getName())));
+                targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.feed.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
+                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.feed.by_other"), Placeholder.unparsed("command_sender", sender.getName())));
             
                 return true;
             }
 
             default -> {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.feed.usage")));
+                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.feed.usage")));
 
                 return true;
             }

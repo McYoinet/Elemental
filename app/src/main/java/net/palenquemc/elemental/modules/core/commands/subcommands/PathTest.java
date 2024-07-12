@@ -53,16 +53,16 @@ public class PathTest implements SubcommandTemplate {
 
     @Override
     public boolean execute(CommandSender sender, Command command, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
 
         if(!sender.hasPermission(permission())) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
         
             return false;
         }
 
         if(args.length != 3) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.path_test.usage")));
+            sender.sendMessage(mm.deserialize(core.getString("core.path_test.usage")));
         
             return false;
         }
@@ -71,13 +71,13 @@ public class PathTest implements SubcommandTemplate {
         String path = args[2];
 
         if(!plugin.config.getConfigHashMap().containsKey(file)) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.path_test.file_not_found"), Placeholder.unparsed("file", file)));
+            sender.sendMessage(mm.deserialize(core.getString("core.path_test.file_not_found"), Placeholder.unparsed("file", file)));
             
             return false;
         }
 
-        if(!messages.getKeys(true).contains(path)) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.path_test.path_not_found"), Placeholder.unparsed("path", path), Placeholder.unparsed("file", file)));
+        if(!core.getKeys(true).contains(path)) {
+            sender.sendMessage(mm.deserialize(core.getString("core.path_test.path_not_found"), Placeholder.unparsed("path", path), Placeholder.unparsed("file", file)));
             
             return false;
         }
@@ -85,7 +85,7 @@ public class PathTest implements SubcommandTemplate {
         FileConfiguration chosenConfig = plugin.config.getConfig(file);
         Component value = mm.deserialize(chosenConfig.getString(path));
         
-        sender.sendMessage(mm.deserialize(messages.getString("messages.path_test.path_found"), Placeholder.unparsed("path", path), Placeholder.unparsed("file", file), Placeholder.component("path_value", value)));
+        sender.sendMessage(mm.deserialize(core.getString("core.path_test.path_found"), Placeholder.unparsed("path", path), Placeholder.unparsed("file", file), Placeholder.component("path_value", value)));
 
         return true;
     }

@@ -1,0 +1,6 @@
+modules:
+  info: true
+  player_control: true
+  server_control: true
+  spawn: true
+  teleport: true

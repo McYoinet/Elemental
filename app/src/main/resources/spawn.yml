@@ -1,0 +1,76 @@
+spawn_module:
+  spawn:
+    location:
+      world: worldname
+      pos_x: 0
+      pos_y: 0
+      pos_z: 0
+      yaw: 0
+      pitch: 0
+    force_on_join: false
+
+  messages:
+    invalid_scope: "<dark_grey>[<red>Elemental<dark_grey>] <white>Invalid scope used on <light_purple><path><white>. Use either <light_purple>global <white>or <light_purple>world<white>."
+    world_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Spawn world <light_purple><world> <white>couldn't be found."
+    teleported: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the spawn."
+    
+    setspawn:
+      usage: |-
+        <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/setspawn <aqua>[coordinates] [world]
+        <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/setspawn <aqua>100 0 100
+      set: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Spawn set on <light_purple><coordinates><white>."
+
+    player_join_actions:
+      player_message:
+        enable: false
+        text: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Welcome to the server, <light_purple><player><white>."
+      server_message:
+        enable: true
+        text: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><player><white> has joined the server."
+        scope: world
+        blacklisted_worlds: []
+      player_title:
+        enable: false
+        main_title: "<green>Welcome to the server"
+        subtitle: "We are happy to see you here"
+      server_title:
+        enable: false
+        main_title: "Player <light_purple><player><white> has joined the server"
+        subtitle: "Let's give him a warm welcome"
+        scope: world
+        blacklisted_worlds: []
+      player_sound:
+        enable: true
+        source: "BLOCK"
+        key: "block.note_block.pling"
+        volume: 1f
+        pitch: 1f
+      server_sound:
+        enable: true
+        source: "BLOCK"
+        key: "block.note_block.pling"
+        volume: 1f
+        pitch: 1f
+        scope: world
+        blacklisted_worlds: []
+    
+    player_quit_actions:
+      server_message:
+        enable: true
+        text: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><player><white> has left the server."
+        scope: world
+        blacklisted_worlds: []
+      server_title:
+        enable: false
+        main_title: "Player <light_purple><player><white> has left the server"
+        subtitle: "Say goodbye!"
+        scope: world
+        blacklisted_worlds: []
+      server_sound:
+        enable: true
+        source: "BLOCK"
+        key: "block.note_block.pling"
+        volume: 1f
+        pitch: 1f
+        scope: world
+        blacklisted_worlds: []

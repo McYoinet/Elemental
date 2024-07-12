@@ -26,22 +26,23 @@ public class Gamemode implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
         if(!sender.hasPermission("elemental.gamemode")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
             
             return true;
         }
 
         if(args.length < 1) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.gamemode.usage")));
+            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.usage")));
             
             return true;
         }
 
         if(gamemodeString(args[0]) == null) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.gamemode.unknown_gamemode")));
+            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.unknown_gamemode")));
 
             return true;
         }
@@ -51,7 +52,7 @@ public class Gamemode implements TabExecutor {
 
         if(args.length > 1) {
             if(!sender.hasPermission("elemental.gamemode.others")) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+                sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
 
                 return true;
             }
@@ -61,10 +62,10 @@ public class Gamemode implements TabExecutor {
                     for(Player player : plugin.getServer().getOnlinePlayers()) {
                         player.setGameMode(gm);
 
-                        player.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.by_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("command_sender", sender.getName())));                       
+                        player.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.set.by_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("command_sender", sender.getName())));                       
                     }
 
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.all"), Placeholder.unparsed("gamemode", gmString)));
+                    sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.set.all"), Placeholder.unparsed("gamemode", gmString)));
 
                     return true;
                 }
@@ -72,15 +73,15 @@ public class Gamemode implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[1]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[1])));
+                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[1])));
 
                     return true;
                 }
 
                 targetPlayer.setGameMode(gm);
 
-                targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.by_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("command_sender", sender.getName())));
-                sender.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.to_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("target_player", targetPlayer.getName())));
+                targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.set.by_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("command_sender", sender.getName())));
+                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.set.to_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("target_player", targetPlayer.getName())));
 
                 return true;
             } else if(args.length > 2) {
@@ -93,7 +94,7 @@ public class Gamemode implements TabExecutor {
                 }
 
                 if(targetPlayersList.isEmpty()) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.server_is_empty")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.server_is_empty")));
 
                     return true;
                 }
@@ -101,8 +102,8 @@ public class Gamemode implements TabExecutor {
                 for(String name : targetPlayersList) {
                     Player targetPlayer = plugin.getServer().getPlayer(name);
 
-                    targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.by_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("command_sender", sender.getName())));
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.to_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("target_player", targetPlayer.getName())));
+                    targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.set.by_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("command_sender", sender.getName())));
+                    sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.set.to_other"), Placeholder.unparsed("gamemode", gmString), Placeholder.unparsed("target_player", targetPlayer.getName())));
                 }
 
                 return true;
@@ -110,7 +111,7 @@ public class Gamemode implements TabExecutor {
 
         } else if(args.length == 1) {
             if(!(sender instanceof Player)) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+                sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
 
                 return true;
             }
@@ -118,7 +119,7 @@ public class Gamemode implements TabExecutor {
             Player player = (Player) sender;
 
             player.setGameMode(gm);
-            sender.sendMessage(mm.deserialize(messages.getString("messages.gamemode.set.self"), Placeholder.unparsed("gamemode", gmString)));
+            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.gamemode.set.self"), Placeholder.unparsed("gamemode", gmString)));
 
             return true;
         }

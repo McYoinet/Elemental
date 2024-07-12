@@ -26,43 +26,43 @@ public class Spawn implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
-        FileConfiguration config = plugin.config.getConfig("config.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
         if(!sender.hasPermission("elmental.spawn")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
             
             return true;
         }
 
         if(!(sender instanceof Player)) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+            sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
         
             return true;
         }
 
         Player player = (Player) sender;
 
-        String worldname = config.getString("config.spawn.location.world");
+        String worldname = spawn.getString("spawn_module.spawn.location.world");
         World world = plugin.getServer().getWorld(worldname);
 
         if(world == null) {
-            player.sendMessage(mm.deserialize(messages.getString("messages.spawn.world_not_found"), Placeholder.unparsed("world", worldname)));
+            player.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.world_not_found"), Placeholder.unparsed("world", worldname)));
 
             return true;
         }
 
-        Double x = config.getDouble("config.spawn.location.pos_x");
-        Double y = config.getDouble("config.spawn.location.pos_y");
-        Double z = config.getDouble("config.spawn.location.pos_z");
+        Double x = spawn.getDouble("spawn_module.spawn.location.pos_x");
+        Double y = spawn.getDouble("spawn_module.spawn.location.pos_y");
+        Double z = spawn.getDouble("spawn_module.spawn.location.pos_z");
 
-        float yaw = (float) config.getDouble("config.spawn.location.yaw");
-        float pitch = (float) config.getDouble("config.spawn.location.pitch");
+        float yaw = (float) spawn.getDouble("spawn_module.spawn.location.yaw");
+        float pitch = (float) spawn.getDouble("spawn_module.spawn.location.pitch");
 
         Location spawnpoint = new Location(world, x, y, z, yaw, pitch);
 
         player.teleport(spawnpoint);
-        player.sendMessage(mm.deserialize(messages.getString("messages.spawn.teleported")));
+        player.sendMessage(mm.deserialize(core.getString("spawn_module.messages.teleported")));
 
         return true;
     }

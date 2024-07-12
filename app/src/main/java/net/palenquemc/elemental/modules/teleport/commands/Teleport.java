@@ -25,23 +25,24 @@ public class Teleport implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
         if(!sender.hasPermission("elmental.teleport")) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
             
             return true;
         }
 
         if(args.length < 1) {
-            sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.usage")));
+            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.usage")));
             
             return true;
         }
 
         if(args.length == 1) {
             if(!(sender instanceof Player)) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+                sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
 
                 return true;
             }
@@ -50,25 +51,25 @@ public class Teleport implements TabExecutor {
             Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
             if(targetPlayer == null) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
 
                 return true;
             }
 
             if(player.getName() == targetPlayer.getName()) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.cannot_teleport_to_self")));
+                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.cannot_teleport_to_self")));
 
                 return true;
             }
 
             player.teleport(targetPlayer);
-            sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.self"), Placeholder.unparsed("target_destination", args[0])));
+            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.self"), Placeholder.unparsed("target_destination", args[0])));
 
             return true;
 
         } else if(args.length == 2) {
             if(!sender.hasPermission("elemental.teleport.others")) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.insufficient_permissions")));
+                sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
 
                 return true;
             }
@@ -76,7 +77,7 @@ public class Teleport implements TabExecutor {
             Player destinationPlayer = plugin.getServer().getPlayer(args[1]);
 
             if(destinationPlayer == null) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[1])));
+                sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[1])));
             
                 return true;
             }
@@ -86,11 +87,11 @@ public class Teleport implements TabExecutor {
                     player.teleport(destinationPlayer);
 
                     if(player.getName() != sender.getName()) {
-                        player.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", destinationPlayer.getName()), Placeholder.unparsed("command_sender", sender.getName())));                       
+                        player.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", destinationPlayer.getName()), Placeholder.unparsed("command_sender", sender.getName())));                       
                     }
                 }
                 
-                sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.all"), Placeholder.unparsed("target_destination", destinationPlayer.getName())));
+                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.all"), Placeholder.unparsed("target_destination", destinationPlayer.getName())));
 
                 return true;
             }
@@ -98,19 +99,19 @@ public class Teleport implements TabExecutor {
             Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
             if(targetPlayer == null) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
                 
                 return true;
             }
 
             targetPlayer.teleport(destinationPlayer);
 
-            sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName()), Placeholder.unparsed("target_destination", destinationPlayer.getName())));
-            targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", destinationPlayer.getName()), Placeholder.unparsed("command_sender", sender.getName())));
+            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName()), Placeholder.unparsed("target_destination", destinationPlayer.getName())));
+            targetPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", destinationPlayer.getName()), Placeholder.unparsed("command_sender", sender.getName())));
         } else if(args.length > 2) {
             if(args.length == 3) {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
     
                     return true;
                 }
@@ -126,18 +127,18 @@ public class Teleport implements TabExecutor {
 
                     player.teleport(loc);
 
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.self"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ()))));
+                    sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.self"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ()))));
                     
                     return true;
                 } catch(NumberFormatException e) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.invalid_location")));
+                    sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.invalid_location")));
     
                     return true;
                 }
                 
             } else if(args.length == 4){
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
     
                     return true;
                 }
@@ -155,7 +156,7 @@ public class Teleport implements TabExecutor {
                         
                         loc = new Location(player.getWorld(), x, y, z);
                     } catch(NumberFormatException e) {
-                        sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.invalid_location")));
+                        sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.invalid_location")));
         
                         return true;
                     }
@@ -164,11 +165,11 @@ public class Teleport implements TabExecutor {
                         targetPlayer.teleport(loc);
     
                         if(targetPlayer.getName() != sender.getName()) {
-                            sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ())), Placeholder.unparsed("command_sender", sender.getName())));                       
+                            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ())), Placeholder.unparsed("command_sender", sender.getName())));                       
                         }
                     }
                     
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.all"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ()))));
+                    sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.all"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ()))));
     
                     return true;
                 }
@@ -176,7 +177,7 @@ public class Teleport implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
 
                     return true;
                 }
@@ -190,17 +191,17 @@ public class Teleport implements TabExecutor {
 
                     targetPlayer.teleport(loc);
 
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.self"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ()))));
-                    targetPlayer.sendMessage(mm.deserialize(messages.getString("messages.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ())), Placeholder.unparsed("command_sender", sender.getName())));
+                    sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.self"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ()))));
+                    targetPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.teleported.by_other"), Placeholder.unparsed("target_destination", Double.toString(loc.getX()) + ", " + Double.toString(loc.getY()) + ", " + Double.toString(loc.getZ())), Placeholder.unparsed("command_sender", sender.getName())));
 
                     return true;
                 } catch(NumberFormatException e) {
-                    sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.invalid_location")));
+                    sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.invalid_location")));
     
                     return true;
                 }
             } else if(args.length > 4) {
-                sender.sendMessage(mm.deserialize(messages.getString("messages.teleport.usage")));
+                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.teleport.usage")));
             
                 return true;
             }

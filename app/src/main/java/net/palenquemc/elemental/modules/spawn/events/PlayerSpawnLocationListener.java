@@ -24,25 +24,25 @@ public class PlayerSpawnLocationListener implements Listener {
 
     @EventHandler
     public void onPlayerSpawn(PlayerSpawnLocationEvent event) {
-        FileConfiguration messages = plugin.config.getConfig("messages.yml");
-        FileConfiguration config = plugin.config.getConfig("config.yml");
+        FileConfiguration core = plugin.config.getConfig("core.yml");
+        FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
-        if(config.getBoolean("config.spawn.force_on_join")) {
-            String worldname = config.getString("config.spawn.location.world");
+        if(spawn.getBoolean("config.spawn.force_on_join")) {
+            String worldname = spawn.getString("spawn_module.spawn.location.world");
             World spawnWorld = plugin.getServer().getWorld(worldname);
 
             if(spawnWorld == null) {
-                Bukkit.getConsoleSender().sendMessage(mm.deserialize(messages.getString("messages.spawn.world_not_found"), Placeholder.unparsed("world", worldname)));
+                Bukkit.getConsoleSender().sendMessage(mm.deserialize(core.getString("spawn_module.messages.world_not_found"), Placeholder.unparsed("world", worldname)));
             
                 return;
             }
 
-            double x = config.getDouble("config.spawn.location.pos_x");
-            double y = config.getDouble("config.spawn.location.pos_y");
-            double z = config.getDouble("config.spawn.location.pos_z");
+            double x = spawn.getDouble("spawn_module.spawn.location.pos_x");
+            double y = spawn.getDouble("spawn_module.spawn.location.pos_y");
+            double z = spawn.getDouble("spawn_module.spawn.location.pos_z");
 
-            float yaw = (float) config.getDouble("config.spawn.location.yaw");
-            float pitch = (float) config.getDouble("config.spawn.location.pitch");
+            float yaw = (float) spawn.getDouble("spawn.spawn.location.yaw");
+            float pitch = (float) spawn.getDouble("spawn.spawn.location.pitch");
 
             Location loc = new Location(spawnWorld, x, y, z, yaw, pitch);
 
