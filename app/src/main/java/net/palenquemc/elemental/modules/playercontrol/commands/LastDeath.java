@@ -1,4 +1,4 @@
-package net.palenquemc.elemental.modules.playercontrol;
+package net.palenquemc.elemental.modules.playercontrol.commands;
 
 import java.util.ArrayList;
 import java.util.List;

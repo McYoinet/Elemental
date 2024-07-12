@@ -1,4 +1,4 @@
-package net.palenquemc.elemental.modules.teleport;
+package net.palenquemc.elemental.modules.teleport.commands;
 
 import java.util.ArrayList;
 import java.util.List;

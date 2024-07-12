@@ -15,17 +15,17 @@ import net.palenquemc.elemental.modules.playercontrol.commands.Gamemode;
 import net.palenquemc.elemental.modules.playercontrol.commands.Getpos;
 import net.palenquemc.elemental.modules.playercontrol.commands.Heal;
 import net.palenquemc.elemental.modules.playercontrol.commands.LastDeath;
-import net.palenquemc.elemental.modules.servercontrol.Broadcast;
+import net.palenquemc.elemental.modules.servercontrol.commands.Broadcast;
 import net.palenquemc.elemental.modules.spawn.commands.SetSpawn;
 import net.palenquemc.elemental.modules.spawn.commands.Spawn;
 import net.palenquemc.elemental.modules.spawn.events.PlayerJoinListener;
 import net.palenquemc.elemental.modules.spawn.events.PlayerQuitListener;
 import net.palenquemc.elemental.modules.spawn.events.PlayerSpawnLocationListener;
-import net.palenquemc.elemental.modules.teleport.Back;
-import net.palenquemc.elemental.modules.teleport.RandomTeleport;
-import net.palenquemc.elemental.modules.teleport.RequestTeleport;
-import net.palenquemc.elemental.modules.teleport.Teleport;
-import net.palenquemc.elemental.modules.teleport.WorldCommand;
+import net.palenquemc.elemental.modules.teleport.commands.Back;
+import net.palenquemc.elemental.modules.teleport.commands.RandomTeleport;
+import net.palenquemc.elemental.modules.teleport.commands.RequestTeleport;
+import net.palenquemc.elemental.modules.teleport.commands.Teleport;
+import net.palenquemc.elemental.modules.teleport.commands.WorldCommand;
 
 public class Elemental extends JavaPlugin {
     MiniMessage mm = MiniMessage.miniMessage();

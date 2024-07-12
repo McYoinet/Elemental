@@ -1,4 +1,4 @@
-package net.palenquemc.elemental.modules.playercontrol;
+package net.palenquemc.elemental.modules.playercontrol.commands;
 
 public class PlayerInfo {
     
