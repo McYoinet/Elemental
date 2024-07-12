@@ -30,13 +30,13 @@ public class Spawn implements TabExecutor {
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
         if(!sender.hasPermission("elmental.spawn")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
 
         if(!(sender instanceof Player)) {
-            sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
         
             return true;
         }
@@ -62,7 +62,7 @@ public class Spawn implements TabExecutor {
         Location spawnpoint = new Location(world, x, y, z, yaw, pitch);
 
         player.teleport(spawnpoint);
-        player.sendMessage(mm.deserialize(core.getString("spawn_module.messages.teleported")));
+        player.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.teleported")));
 
         return true;
     }

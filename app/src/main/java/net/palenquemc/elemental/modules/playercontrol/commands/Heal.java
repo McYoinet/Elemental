@@ -28,7 +28,7 @@ public class Heal implements TabExecutor {
         FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
         if(!sender.hasPermission("elmental.heal")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
@@ -36,7 +36,7 @@ public class Heal implements TabExecutor {
         switch(args.length) {
             case 0 -> {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
 
                     return true;
                 }
@@ -54,13 +54,13 @@ public class Heal implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found")));
 
                     return true;
                 }
 
                 if(!sender.hasPermission("elemental.heal.others")) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
                     
                     return true;
                 }

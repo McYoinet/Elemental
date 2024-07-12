@@ -29,7 +29,7 @@ public class Teleport implements TabExecutor {
         FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
         if(!sender.hasPermission("elmental.teleport")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
@@ -42,7 +42,7 @@ public class Teleport implements TabExecutor {
 
         if(args.length == 1) {
             if(!(sender instanceof Player)) {
-                sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
 
                 return true;
             }
@@ -51,7 +51,7 @@ public class Teleport implements TabExecutor {
             Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
             if(targetPlayer == null) {
-                sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
 
                 return true;
             }
@@ -69,7 +69,7 @@ public class Teleport implements TabExecutor {
 
         } else if(args.length == 2) {
             if(!sender.hasPermission("elemental.teleport.others")) {
-                sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
 
                 return true;
             }
@@ -77,7 +77,7 @@ public class Teleport implements TabExecutor {
             Player destinationPlayer = plugin.getServer().getPlayer(args[1]);
 
             if(destinationPlayer == null) {
-                sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[1])));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[1])));
             
                 return true;
             }
@@ -99,7 +99,7 @@ public class Teleport implements TabExecutor {
             Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
             if(targetPlayer == null) {
-                sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
                 
                 return true;
             }
@@ -111,7 +111,7 @@ public class Teleport implements TabExecutor {
         } else if(args.length > 2) {
             if(args.length == 3) {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
     
                     return true;
                 }
@@ -138,7 +138,7 @@ public class Teleport implements TabExecutor {
                 
             } else if(args.length == 4){
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
     
                     return true;
                 }
@@ -177,7 +177,7 @@ public class Teleport implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
 
                     return true;
                 }

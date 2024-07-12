@@ -30,7 +30,7 @@ public class Gamemode implements TabExecutor {
         FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
         if(!sender.hasPermission("elemental.gamemode")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
@@ -52,7 +52,7 @@ public class Gamemode implements TabExecutor {
 
         if(args.length > 1) {
             if(!sender.hasPermission("elemental.gamemode.others")) {
-                sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
 
                 return true;
             }
@@ -73,7 +73,7 @@ public class Gamemode implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[1]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[1])));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[1])));
 
                     return true;
                 }
@@ -94,7 +94,7 @@ public class Gamemode implements TabExecutor {
                 }
 
                 if(targetPlayersList.isEmpty()) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.server_is_empty")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.server_is_empty")));
 
                     return true;
                 }
@@ -111,7 +111,7 @@ public class Gamemode implements TabExecutor {
 
         } else if(args.length == 1) {
             if(!(sender instanceof Player)) {
-                sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
 
                 return true;
             }

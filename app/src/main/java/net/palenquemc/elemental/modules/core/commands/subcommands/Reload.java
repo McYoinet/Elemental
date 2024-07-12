@@ -34,13 +34,13 @@ public class Reload implements SubcommandTemplate {
         FileConfiguration core = plugin.config.getConfig("core.yml");
 
         if(!sender.hasPermission(permission())) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
 
             return false;
         }
 
         boolean result = plugin.config.reloadConfig();
-        sender.sendMessage(mm.deserialize(core.getString("core.plugin_reloaded")));
+        sender.sendMessage(mm.deserialize(core.getString("core_module.plugin_reloaded")));
 
         return result;
     }

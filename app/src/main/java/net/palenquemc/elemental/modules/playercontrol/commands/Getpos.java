@@ -29,7 +29,7 @@ public class Getpos implements TabExecutor {
         FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
         if(!sender.hasPermission("elemental.getpos")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
@@ -37,7 +37,7 @@ public class Getpos implements TabExecutor {
         switch(args.length) {
             case 0 -> {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
 
                     return true;
                 }
@@ -61,7 +61,7 @@ public class Getpos implements TabExecutor {
 
             case 1 -> {
                 if(!sender.hasPermission("elemental.getpos.others")) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
                     
                     return true;
                 }
@@ -69,7 +69,7 @@ public class Getpos implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
                     
                     return true;
                 }

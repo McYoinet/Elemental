@@ -31,7 +31,7 @@ public class Broadcast implements TabExecutor {
         FileConfiguration serverControl = plugin.config.getConfig("server_control.yml");
 
         if(!sender.hasPermission("elmental.broadcast")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }

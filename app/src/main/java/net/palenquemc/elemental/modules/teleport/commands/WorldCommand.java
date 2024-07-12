@@ -29,7 +29,7 @@ public class WorldCommand implements TabExecutor {
         FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
         if(!sender.hasPermission("elemental.teleport")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
@@ -52,7 +52,7 @@ public class WorldCommand implements TabExecutor {
             
             if(args.length == 1) {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
     
                     return true;
                 }
@@ -63,7 +63,7 @@ public class WorldCommand implements TabExecutor {
                 sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_changed.self"), Placeholder.unparsed("world", worldname)));
             } else if(args.length == 2) {
                 if(!sender.hasPermission("elemental.teleport.others")) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
     
                     return true;
                 }
@@ -71,7 +71,7 @@ public class WorldCommand implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[1]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[1])));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[1])));
                     
                     return true;
                 }

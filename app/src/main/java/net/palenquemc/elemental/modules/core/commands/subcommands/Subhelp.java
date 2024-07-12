@@ -35,12 +35,12 @@ public class Subhelp implements SubcommandTemplate {
         FileConfiguration core = plugin.config.getConfig("core.yml");
 
         if(!sender.hasPermission(permission())) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
         
             return false;
         }
 
-        sender.sendMessage(mm.deserialize(core.getString("core.plugin_help")));
+        sender.sendMessage(mm.deserialize(core.getString("core_module.plugin_help")));
         
         return true;
     }

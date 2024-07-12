@@ -35,8 +35,6 @@ public class ModuleManager {
 
     MiniMessage mm = MiniMessage.miniMessage();
 
-    FileConfiguration modules = plugin.config.getConfig("modules.yml");
-
     private void loadCoreModule() {
         plugin.getCommand("elemental").setExecutor(new ElementalCommand(plugin));
     
@@ -44,6 +42,8 @@ public class ModuleManager {
     }
 
     private boolean loadPlayerControlModule() {
+        FileConfiguration modules = plugin.config.getConfig("modules.yml");
+
         if(modules.getBoolean("modules.player_control")) {
             plugin.getCommand("gamemode").setExecutor(new Gamemode(plugin));
             plugin.getCommand("feed").setExecutor(new Feed(plugin));
@@ -62,6 +62,8 @@ public class ModuleManager {
     }
 
     private boolean loadServerControlModule() {
+        FileConfiguration modules = plugin.config.getConfig("modules.yml");
+
         if(modules.getBoolean("modules.server_control")) {
             plugin.getCommand("broadcast").setExecutor(new Broadcast(plugin));
 
@@ -74,6 +76,8 @@ public class ModuleManager {
     }
 
     private boolean loadSpawnModule() {
+        FileConfiguration modules = plugin.config.getConfig("modules.yml");
+
         if(modules.getBoolean("modules.spawn")) {
             plugin.getCommand("setspawn").setExecutor(new SetSpawn(plugin));
             plugin.getCommand("spawn").setExecutor(new Spawn(plugin));
@@ -91,6 +95,8 @@ public class ModuleManager {
     }
 
     private boolean loadTeleportModule() {
+        FileConfiguration modules = plugin.config.getConfig("modules.yml");
+        
         if(modules.getBoolean("modules.teleport")) {
             plugin.getCommand("teleport").setExecutor(new Teleport(plugin));
             plugin.getCommand("world").setExecutor(new WorldCommand(plugin));

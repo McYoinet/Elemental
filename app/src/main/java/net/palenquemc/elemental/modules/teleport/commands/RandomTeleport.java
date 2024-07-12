@@ -30,7 +30,7 @@ public class RandomTeleport implements TabExecutor {
         FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
         if(!sender.hasPermission("elemental.teleport.random")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
@@ -53,7 +53,7 @@ public class RandomTeleport implements TabExecutor {
 
         if(args.length == 0) {
             if(!(sender instanceof Player)) {
-                sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
 
                 return true;
             }
@@ -83,7 +83,7 @@ public class RandomTeleport implements TabExecutor {
             Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
             if(targetPlayer == null) {
-                sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
                 
                 return true;
             }

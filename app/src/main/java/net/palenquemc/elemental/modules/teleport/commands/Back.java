@@ -29,13 +29,13 @@ public class Back implements TabExecutor {
         FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
         if(!sender.hasPermission("elemental.teleport.back")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
 
         if(!(sender instanceof Player)) {
-            sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
 
             return true;
         }

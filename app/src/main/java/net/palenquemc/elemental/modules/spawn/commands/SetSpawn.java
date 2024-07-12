@@ -30,7 +30,7 @@ public class SetSpawn implements TabExecutor {
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
         if(!sender.hasPermission("elmental.setspawn")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
@@ -38,7 +38,7 @@ public class SetSpawn implements TabExecutor {
         switch (args.length) {
             case 0 -> {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
                     
                     return true;
                 }
@@ -78,7 +78,7 @@ public class SetSpawn implements TabExecutor {
 
             case 3 -> {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
                     
                     return true;
                 }
@@ -90,6 +90,8 @@ public class SetSpawn implements TabExecutor {
                 Double x = Double.parseDouble(args[0]);
                 Double y = Double.parseDouble(args[1]);
                 Double z = Double.parseDouble(args[2]);
+
+                spawn.set("spawn_module.spawn.location.world", worldname);
 
                 spawn.set("spawn_module.spawn.location.pos_x", x);
                 spawn.set("spawn_module.spawn.location.pos_y", y);

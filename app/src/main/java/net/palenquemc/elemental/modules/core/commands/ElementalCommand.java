@@ -12,6 +12,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.modules.core.commands.subcommands.PathTest;
+import net.palenquemc.elemental.modules.core.commands.subcommands.Reload;
 import net.palenquemc.elemental.modules.core.commands.subcommands.Subhelp;
 
 public class ElementalCommand implements TabExecutor {
@@ -29,6 +31,8 @@ public class ElementalCommand implements TabExecutor {
 
     private void addSubcommands() {
         subcommands.put("help", new Subhelp(plugin));
+        subcommands.put("pathtest", new PathTest(plugin));
+        subcommands.put("reload", new Reload(plugin));
     }
 
     @Override
@@ -37,12 +41,12 @@ public class ElementalCommand implements TabExecutor {
 
         if(args.length == 0) {
             if(!sender.hasPermission("elemental.plugininfo")) {
-                sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+                sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
                 
                 return false;
             }
 
-            sender.sendMessage(mm.deserialize(core.getString("core.plugin_info"), Placeholder.unparsed("version", plugin.version)));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.plugin_info"), Placeholder.unparsed("version", plugin.version)));
             
             return true;
         } else if(args.length >= 1 && subcommands.containsKey(args[0])){
@@ -50,7 +54,7 @@ public class ElementalCommand implements TabExecutor {
             
             return result;
         } else {
-            sender.sendMessage(mm.deserialize(core.getString("core.unknown_subcommand")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.unknown_subcommand")));
             return false;
         }
     }

@@ -21,8 +21,8 @@ public class Elemental extends JavaPlugin {
 
     public String internalPrefix = "<dark_grey>[<#00e580>Elemental<dark_grey>]<reset>";
 
-    public ConfigurationManager config = new ConfigurationManager(this);
     public ModuleManager modules = new ModuleManager(this);
+    public ConfigurationManager config = new ConfigurationManager(this);
 
     @Override
     public void onEnable() {

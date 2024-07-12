@@ -30,7 +30,7 @@ public class LastDeath implements TabExecutor {
         FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
         if(!sender.hasPermission("elemental.lastdeath")) {
-            sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
         }
@@ -38,7 +38,7 @@ public class LastDeath implements TabExecutor {
         switch (args.length) {
             case 0 -> {
                 if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.executable_from_player")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
 
                     return true;
                 }
@@ -69,7 +69,7 @@ public class LastDeath implements TabExecutor {
 
             case 1 -> {
                 if(!sender.hasPermission("elemental.lastdeath.others")) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
 
                     return true;
                 }
@@ -77,7 +77,7 @@ public class LastDeath implements TabExecutor {
                 OfflinePlayer targetPlayer = plugin.getServer().getOfflinePlayer(args[0]);
                 
                 if(!targetPlayer.hasPlayedBefore()) {
-                    sender.sendMessage(mm.deserialize(core.getString("core.target_not_found"), Placeholder.unparsed("target_player", args[0])));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
                     
                     return true;
                 }
