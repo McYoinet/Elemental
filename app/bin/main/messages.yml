@@ -1,0 +1,238 @@
+# Elemental - Messages
+
+# Using MiniMessage format - https://docs.advntr.dev/minimessage/format.html
+# Minecraft sound list - https://www.digminecraft.com/lists/sound_list_pc.php
+
+messages:
+  insufficient_permissions: "<dark_grey>[<red>Elemental<dark_grey>] <white>Insufficient permissions."
+  unknown_subcommand: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown subcommand."
+  executable_from_console: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can only execute this command from the console."
+  executable_from_player: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can only execute this command as a player."
+  target_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player> <white>was not found."
+  server_is_empty: "<dark_grey>[<red>Elemental<dark_grey>] <white>Server is empty."
+  path_test:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/elemental pathtest <aqua><path>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/elemental pathtest <aqua>messages.insufficient_permissions
+    file_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>File <light_purple><file> <white>not found."
+    path_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Path <light_purple><path> <white>in file <light_purple><file> <white>not found."
+    path_found: |-
+      <reset>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Showing value stored in <light_purple><path><white> of <light_purple><file><white>:
+      <reset>
+      <path_value>
+  broadcast:
+    missing_message: "<dark_grey>[<red>Elemental<dark_grey>] <white>You must specify a message to broadcast."
+    broadcast: "<dark_grey>[<#00e580>Broadcast<dark_grey>] <white><message>"
+    sound:
+      enable: true
+      source: "BLOCK"
+      key: "block.note_block.pling"
+      volume: 1f
+      pitch: 1f
+    title:
+      enable: false
+      main_title: "<message>"
+      subtitle: "This is a broadcast"
+  gamemode:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/gamemode <aqua><gamemode> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/gamemode <aqua>creative Player
+    unknown_gamemode: "<dark_grey>[<red>Elemental<dark_grey>] <white>Unknown gamemode."
+    set:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your gamemode was set to <light_purple><gamemode><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Target player <light_purple><target_player>'s<white> gamemode was set to <light_purple><gamemode><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your gamemode was set to <light_purple><gamemode><white> by <light_purple><command_sender><white>."
+      all: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Set everyone's gamemode to <light_purple><gamemode><white>."
+  teleport:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/teleport <aqua><player> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/teleport <aqua>Player1
+    invalid_location: "<dark_grey>[<red>Elemental<dark_grey>] <white>Specify a valid set of coordinates."
+    cannot_teleport_to_self: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can't teleport to yourself."
+    teleported:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to <light_purple><target_destination><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was teleported to <light_purple><target_destination><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to <light_purple><target_destination> <white>by <light_purple><command_sender><white>."
+      all: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Everyone was teleported to <light_purple><target_destination><white>."
+  random_teleport:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/rtp <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/rtp <aqua>Player1
+    not_enough_players: "<dark_grey>[<red>Elemental<dark_grey>] <white>There are not enough players to execute this command."
+    teleported:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were randomly teleported to <light_purple><target_destination><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was randomly teleported to <light_purple><target_destination><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were randomly teleported to <light_purple><target_destination> <white>by <light_purple><command_sender><white>."
+      all: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Everyone was randomly teleported to <light_purple><target_destination><white>."
+  request_teleport:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/tpa <aqua><send | accept | deny | cancel> <player>
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/tpa <aqua>send Player1
+    cannot_request_to_self: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can't send a teleportation request to yourself."
+    request:
+      sent: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You sent a teleportation request to <light_purple><target_destination><white>."
+      received: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You received a teleportation request from <light_purple><command_sender><white>."
+      not_found:
+        sender: "<dark_grey>[<red>Elemental<dark_grey>] <white>You have not sent a teleportation request to <light_purple><target_destination><white>."
+        recipient: "<dark_grey>[<red>Elemental<dark_grey>] <white>You don't have a teleportation request from <light_purple><command_sender><white>."
+      accepted:
+        recipient: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You accepted the teleportation request from <light_purple><command_sender><white>."
+        sender: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><target_destination><white> accepted your teleportation request."
+      denied:
+        recipient: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You denied the teleportation request from <light_purple><command_sender><white>."
+        sender: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><target_destination><white> denied your teleportation request."
+      cancelled:
+        recipient: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender><white> has cancelled their teleportation request."
+        sender: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You cancelled the teleportation request to <light_purple><target_destination><white>."
+  back:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/back
+    teleported: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to your last death, on coordinates <light_purple><target_destination><white> on world <light_purple><world><white>."
+    world_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>The world your last death occurred on couldn't be found."
+    no_deaths_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>You haven't died yet."
+  world:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/world <aqua><world> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/world <aqua>MyWorld Player1
+    world_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target world <light_purple><world> <white>not found."
+    world_changed:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the world <light_purple><world><white>."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player> <white>was teleported to world <light_purple><world><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the world <light_purple><world> <white>by <light_purple><command_sender><white>."
+  lastdeath:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/lastdeath <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/lastdeath <aqua>Player1
+    no_deaths_found: 
+      self: "<dark_grey>[<red>Elemental<dark_grey>] <white>You haven't died yet."
+      other: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player> <white>hasn't died yet."
+    world_not_found:
+      self: "<dark_grey>[<red>Elemental<dark_grey>] <white>The world your last death occurred on couldn't be found."
+      other: "<dark_grey>[<red>Elemental<dark_grey>] <white>The world where <light_purple><target_player><white>'s last death occurred couldn't be found."
+    coordinates:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your last death was on coordinates <light_purple><coordinates> <white>on world <light_purple><world><white>."
+      other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Last death of <light_purple><target_player><white> was on coordinates <light_purple><coordinates><white>, on world <light_purple><world><white>."
+  getpos:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/getpos <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/getpos <aqua>Player1
+    location_not_found:
+      self: "<dark_grey>[<red>Elemental<dark_grey>] <white>Your current location couldn't be found."
+      other: "<dark_grey>[<red>Elemental<dark_grey>] <white>Target player <light_purple><target_player><white>'s location couldn't be found."
+    target_player_bypass: "<dark_grey>[<red>Elemental<dark_grey>] <white>You're not allowed to see the location of <light_purple><target_player><white>."
+    location:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your current location is <light_purple><coordinates> <white>on world <light_purple><world><white>."
+      other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Target player <light_purple><target_player><white>'s current location is <light_purple><coordinates> <white>on world <light_purple><world><white>."
+  setspawn:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/setspawn <aqua>[coordinates] [world]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/setspawn <aqua>100 0 100
+    set: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Spawn set on <light_purple><coordinates><white>."
+  spawn:
+    invalid_scope: "<dark_grey>[<red>Elemental<dark_grey>] <white>Invalid scope used on <light_purple><path><white>. Use either <light_purple>global <white>or <light_purple>world<white>."
+    world_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Spawn world <light_purple><world> <white>couldn't be found."
+    teleported: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were teleported to the spawn."
+    actions:
+      player_message:
+        enable: false
+        text: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Welcome to the server, <light_purple><player><white>."
+      server_message:
+        enable: true
+        text: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><player><white> has joined the server."
+        scope: world
+        blacklisted_worlds: []
+      player_title:
+        enable: false
+        main_title: "<green>Welcome to the server"
+        subtitle: "We are happy to see you here"
+      server_title:
+        enable: false
+        main_title: "Player <light_purple><player><white> has joined the server"
+        subtitle: "Let's give him a warm welcome"
+        scope: world
+        blacklisted_worlds: []
+      player_sound:
+        enable: true
+        source: "BLOCK"
+        key: "block.note_block.pling"
+        volume: 1f
+        pitch: 1f
+      server_sound:
+        enable: true
+        source: "BLOCK"
+        key: "block.note_block.pling"
+        volume: 1f
+        pitch: 1f
+        scope: world
+        blacklisted_worlds: []
+  player_quit:
+    invalid_scope: "<dark_grey>[<red>Elemental<dark_grey>] <white>Invalid scope used on <light_purple><path><white>. Use either <light_purple>global <white>or <light_purple>world<white>."
+    actions:
+      server_message:
+        enable: true
+        text: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><player><white> has left the server."
+        scope: world
+        blacklisted_worlds: []
+      server_title:
+        enable: false
+        main_title: "Player <light_purple><player><white> has left the server"
+        subtitle: "Say goodbye!"
+        scope: world
+        blacklisted_worlds: []
+      server_sound:
+        enable: true
+        source: "BLOCK"
+        key: "block.note_block.pling"
+        volume: 1f
+        pitch: 1f
+        scope: world
+        blacklisted_worlds: []
+  clear_inventory:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/clearinventory <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/clearinventory <aqua>Player1
+    self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your inventory was cleared."
+    to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s inventory was cleared."
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has cleared your inventory."
+  feed:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/feed <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/feed <aqua>Player1
+    self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You've been fed."
+    to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> has been fed."
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has fed you."
+  heal:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/heal <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/heal <aqua>Player1
+    self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You've been healed."
+    to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> has been healed."
+    by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>has healed you."
+  fly:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/fly <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/fly <aqua>Player1
+    enable:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your flight mode was enabled."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s flight mode was enabled."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>enabled your flight mode."
+    disable:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your flight mode was disabled."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s flight mode was disabled."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>disabled your flight mode."
+  reloaded: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Configuration files reloaded."
+  plugin_info: |-
+    <reset>
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Developed by <light_purple>McYoinet<white> on version <light_purple><version><white>.
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Use <dark_aqua>/elemental help<white> to get a list of commands.
+    <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Get support on the Discord server: <blue>https://discord.gg/fkmKSXUBZ4
+    <reset>
+  plugin_help: |-
+    <reset>
+    <dark_grey> ➤ <white>Showing help page of <#00e580>Elemental <light_purple>v<version><white>.
+    <dark_grey> ▸ <dark_aqua>/elemental <grey>➝ <white>Shows general plugin information.
+    <dark_grey> ▸ <dark_aqua>/elemental help <grey>➝ <white>Shows this information page.
+    <dark_grey> ▸ <dark_aqua>/elemental pathtest <aqua><file> <path> <grey>➝ <white>Prints the value stored in the specified path of the chosen file - Must be in valid YAML notation.
+    <dark_grey> ▸ <dark_aqua>/elemental reload ➝ <white>Reloads the configuration files of the plugin.
+    <reset>
