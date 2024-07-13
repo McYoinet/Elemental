@@ -12,8 +12,11 @@ import net.palenquemc.elemental.modules.playercontrol.commands.Feed;
 import net.palenquemc.elemental.modules.playercontrol.commands.Fly;
 import net.palenquemc.elemental.modules.playercontrol.commands.Gamemode;
 import net.palenquemc.elemental.modules.playercontrol.commands.Getpos;
+import net.palenquemc.elemental.modules.playercontrol.commands.God;
 import net.palenquemc.elemental.modules.playercontrol.commands.Heal;
 import net.palenquemc.elemental.modules.playercontrol.commands.LastDeath;
+import net.palenquemc.elemental.modules.playercontrol.commands.Speed;
+import net.palenquemc.elemental.modules.playercontrol.commands.XPCommand;
 import net.palenquemc.elemental.modules.servercontrol.commands.Broadcast;
 import net.palenquemc.elemental.modules.spawn.commands.SetSpawn;
 import net.palenquemc.elemental.modules.spawn.commands.Spawn;
@@ -52,6 +55,9 @@ public class ModuleManager {
             plugin.getCommand("clearinventory").setExecutor(new ClearInventory(plugin));
             plugin.getCommand("getpos").setExecutor(new Getpos(plugin));
             plugin.getCommand("lastdeath").setExecutor(new LastDeath(plugin));
+            plugin.getCommand("god").setExecutor(new God(plugin));
+            plugin.getCommand("speed").setExecutor(new Speed(plugin));
+            plugin.getCommand("xp").setExecutor(new XPCommand(plugin));
 
             Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Loaded <light_purple>player_control<white> module.", Placeholder.parsed("prefix", plugin.internalPrefix)));
 

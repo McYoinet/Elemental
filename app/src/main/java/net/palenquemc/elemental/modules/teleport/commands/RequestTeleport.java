@@ -1,6 +1,7 @@
 package net.palenquemc.elemental.modules.teleport.commands;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -12,7 +13,6 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
-import net.palenquemc.elemental.utils.TempData;
 
 public class RequestTeleport implements TabExecutor {
 
@@ -26,6 +26,8 @@ public class RequestTeleport implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        HashMap<String, String> tpRequests = plugin.tpRequests;
+
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
@@ -64,24 +66,24 @@ public class RequestTeleport implements TabExecutor {
         }
 
         if(args[0].equalsIgnoreCase("send")) {
-            if(TempData.tpRequests.containsKey(player.getName())) {
-                Player oldPlayer = plugin.getServer().getPlayer(TempData.tpRequests.get(player.getName()));
+            if(tpRequests.containsKey(player.getName())) {
+                Player oldPlayer = plugin.getServer().getPlayer(tpRequests.get(player.getName()));
 
                 player.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.cancelled.sender"), Placeholder.unparsed("target_destination", oldPlayer.getName())));
                 oldPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.cancelled.recipient"), Placeholder.unparsed("command_sender", player.getName())));
             }
 
-            TempData.tpRequests.put(player.getName(), targetPlayer.getName());
+            tpRequests.put(player.getName(), targetPlayer.getName());
 
             player.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.sent"), Placeholder.unparsed("target_destination", targetPlayer.getName())));
             targetPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.received"), Placeholder.unparsed("command_sender", player.getName())));
             
             return true;
         } else if(args[0].equalsIgnoreCase("accept")) {
-            if(TempData.tpRequests.containsKey(targetPlayer.getName()) && TempData.tpRequests.get(targetPlayer.getName()) == player.getName()) {
+            if(tpRequests.containsKey(targetPlayer.getName()) && tpRequests.get(targetPlayer.getName()) == player.getName()) {
                 targetPlayer.teleport(player);
 
-                TempData.tpRequests.remove(targetPlayer.getName());
+                tpRequests.remove(targetPlayer.getName());
                 
                 targetPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.accepted.sender"), Placeholder.unparsed("target_destination", player.getName())));
                 player.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.accepted.recipient"), Placeholder.unparsed("command_sender", targetPlayer.getName())));
@@ -93,8 +95,8 @@ public class RequestTeleport implements TabExecutor {
                 return true;
             }
         } else if(args[0].equalsIgnoreCase("deny")) {
-            if(TempData.tpRequests.containsKey(targetPlayer.getName()) && TempData.tpRequests.get(targetPlayer.getName()) == player.getName()) {
-                TempData.tpRequests.remove(targetPlayer.getName());
+            if(tpRequests.containsKey(targetPlayer.getName()) && tpRequests.get(targetPlayer.getName()) == player.getName()) {
+                tpRequests.remove(targetPlayer.getName());
 
                 player.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.denied.sender"), Placeholder.unparsed("target_destination", targetPlayer.getName())));
                 targetPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.denied.recipient"), Placeholder.unparsed("command_sender", player.getName())));
@@ -106,13 +108,13 @@ public class RequestTeleport implements TabExecutor {
                 return true;
             }
         } else if(args[0].equalsIgnoreCase("cancel")) {
-            if(!TempData.tpRequests.containsKey(player.getName())) {
+            if(!tpRequests.containsKey(player.getName())) {
                 player.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.not_found.sender"), Placeholder.unparsed("target_destination", targetPlayer.getName())));
 
                 return true;
             }
 
-            TempData.tpRequests.remove(player.getName());
+            tpRequests.remove(player.getName());
 
             player.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.cancelled.sender"), Placeholder.unparsed("target_destination", targetPlayer.getName())));
             targetPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.request_teleport.request.cancelled.recipient"), Placeholder.unparsed("command_sender", player.getName())));

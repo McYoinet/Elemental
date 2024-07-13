@@ -55,6 +55,13 @@ commands:
     description: Sets the health of a player to the maximum.
   fly:
     description: Toggles the flight mode of a player.
+  god:
+    description: Toggles the god mode of a player.
+  speed:
+    description: Sets the walking or flying speed of a player.
+  xp:
+    description: Manages the experience points of a player.
+    aliases: [experience]
 
 # Permissions
 permissions:
@@ -115,3 +122,18 @@ permissions:
     default: op
     children:
       elemental.fly.others: true
+  elemental.god:
+    description: Toggles the god mode of a player.
+    default: op
+    children:
+      elemental.god.others: true
+  elemental.speed:
+    description: Sets the walking or flying speed of a player.
+    default: op
+    children:
+      elemental.speed.others: true
+  elemental.xp:
+    description: Manages the experience points of a player.
+    default: op
+    children:
+      elemental.xp.others: true

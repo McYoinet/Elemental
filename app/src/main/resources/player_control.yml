@@ -72,3 +72,48 @@ player_control_module:
       self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your flight mode was disabled."
       to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s flight mode was disabled."
       by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>disabled your flight mode."
+  
+  god:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/god <aqua>[player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/god <aqua>Player1
+    enable:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your god mode was enabled."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s god mode was enabled."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>enabled your god mode."
+    disable:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your god mode was disabled."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s god mode was disabled."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>disabled your god mode."
+  
+  speed:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/speed <aqua><amount> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/speed <aqua>1 Player1
+    invalid_value: "<dark_grey>[<red>Elemental<dark_grey>] <white>Speed value must be between 1 and 10."
+    set:
+      walking:
+        self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your walking speed was set to <light_purple><amount><white>."
+        to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s walking speed was set to <light_purple><amount><white>."
+        by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>set your walking speed to <light_purple><amount><white>."
+      flying:
+        self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your flying speed was set to <light_purple><amount><white>."
+        to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s flying speed was set to <light_purple><amount><white>."
+        by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>set your flying speed to <light_purple><amount><white>."
+
+  xp:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/xp <aqua><add | set | remove> <amount> [player]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/xp <aqua>add 10 Player1
+    add:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were granted <light_purple><amount><white> points of experience."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> was granted <light_purple><amount><white> experience points."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>granted you <light_purple><amount><white>experience points."
+    set:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your experience was set to <light_purple><amount><white> points."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s experience was set to <light_purple><amount><white> points."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>set your experience to <light_purple><amount><white> points."
+    remove:
+      self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Removed <light_purple><amount><white> points of your experience."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Removed <light_purple><amount><white> points of experience from <light_purple><target_player><white>."
+      by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>removed <light_purple><amount> <white>points from your experience."

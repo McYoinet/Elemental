@@ -54,7 +54,7 @@ public class Heal implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
 
                     return true;
                 }
@@ -67,8 +67,8 @@ public class Heal implements TabExecutor {
 
                 targetPlayer.setHealth(20);
 
-                targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.heal.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
-                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.heal.by_other"), Placeholder.unparsed("command_sender", sender.getName())));
+                targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.heal.by_other"), Placeholder.unparsed("command_sender", sender.getName())));
+                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.heal.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
             
                 return true;
             }

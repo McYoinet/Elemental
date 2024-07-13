@@ -54,7 +54,7 @@ public class Feed implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found")));
+                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
 
                     return true;
                 }
@@ -67,8 +67,8 @@ public class Feed implements TabExecutor {
 
                 targetPlayer.setFoodLevel(20);
 
-                targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.feed.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
-                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.feed.by_other"), Placeholder.unparsed("command_sender", sender.getName())));
+                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.feed.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
+                targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.feed.by_other"), Placeholder.unparsed("command_sender", sender.getName())));
             
                 return true;
             }

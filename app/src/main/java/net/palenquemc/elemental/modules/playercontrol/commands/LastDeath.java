@@ -76,7 +76,7 @@ public class LastDeath implements TabExecutor {
 
                 OfflinePlayer targetPlayer = plugin.getServer().getOfflinePlayer(args[0]);
                 
-                if(!targetPlayer.hasPlayedBefore()) {
+                if(targetPlayer.getLastSeen() == 0) {
                     sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[0])));
                     
                     return true;

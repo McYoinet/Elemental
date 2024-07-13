@@ -1,5 +1,7 @@
 package net.palenquemc.elemental;
 
+import java.util.HashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +25,8 @@ public class Elemental extends JavaPlugin {
 
     public ModuleManager modules = new ModuleManager(this);
     public ConfigurationManager config = new ConfigurationManager(this);
+
+    public HashMap<String, String> tpRequests = new HashMap<>();
 
     @Override
     public void onEnable() {
