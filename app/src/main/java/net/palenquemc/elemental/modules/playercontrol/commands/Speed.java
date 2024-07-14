@@ -14,7 +14,7 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
 
 public class Speed implements TabExecutor {
-        private Elemental plugin;
+    private Elemental plugin;
     
     public Speed(Elemental plugin) {
         this.plugin = plugin;
@@ -27,7 +27,7 @@ public class Speed implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
-        if(!sender.hasPermission("elmental.fly")) {
+        if(!sender.hasPermission("elmental.speed")) {
             sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
             
             return true;
