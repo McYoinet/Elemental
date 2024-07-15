@@ -151,7 +151,7 @@ public class Nickname implements TabExecutor {
                             }
                         } else {
                             if(names.isNickname(target)) {
-                                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.get.other"), Placeholder.parsed("target_player", names.getRealName(target)), Placeholder.parsed("nickname", names.getNickname(target))));
+                                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.get.belongs_to"), Placeholder.parsed("target_player", names.getRealName(target)), Placeholder.parsed("nickname", names.getNickname(names.getRealName(target)))));
                             
                                 return true;
                             } else {
