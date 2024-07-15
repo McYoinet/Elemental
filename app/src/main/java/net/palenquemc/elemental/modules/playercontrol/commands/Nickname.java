@@ -201,7 +201,7 @@ public class Nickname implements TabExecutor {
                         Player targetPlayer = plugin.getServer().getPlayer(target);
 
                         if(targetPlayer == null && !playerControl.getBoolean("player_control_module.nickname.keep_nickname_after_disconnect")) {
-                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.keep_disabled")));
+                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.keep_disabled"), Placeholder.unparsed("target_player", target)));
 
                             return true;
                         }
