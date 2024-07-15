@@ -64,6 +64,9 @@ commands:
     aliases: [experience]
   playerinfo:
     description: Gets basic information about a player.
+  nickname:
+    description: Manages the nickname of a player.
+    aliases: [nick]
 
 # Permissions
 permissions:
@@ -142,3 +145,11 @@ permissions:
   elemental.playerinfo:
     description: Shows basic information about a player.
     default: op
+  elemental.nickname:
+    description: Manages the nickname of a player.
+    default: op
+    children:
+      elemental.nickname.set.self: true
+      elemental.nickname.get.self: true
+      elemental.nickname.set.others: true
+      elemental.nickname.get.others: true

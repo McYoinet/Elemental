@@ -15,6 +15,7 @@ import net.palenquemc.elemental.modules.playercontrol.commands.Getpos;
 import net.palenquemc.elemental.modules.playercontrol.commands.God;
 import net.palenquemc.elemental.modules.playercontrol.commands.Heal;
 import net.palenquemc.elemental.modules.playercontrol.commands.LastDeath;
+import net.palenquemc.elemental.modules.playercontrol.commands.Nickname;
 import net.palenquemc.elemental.modules.playercontrol.commands.PlayerInfo;
 import net.palenquemc.elemental.modules.playercontrol.commands.Speed;
 import net.palenquemc.elemental.modules.playercontrol.commands.XPCommand;
@@ -31,7 +32,7 @@ import net.palenquemc.elemental.modules.teleport.commands.Teleport;
 import net.palenquemc.elemental.modules.teleport.commands.WorldCommand;
 
 public class ModuleManager {
-    private Elemental plugin;
+    private final Elemental plugin;
 
     public ModuleManager(Elemental plugin) {
         this.plugin = plugin;
@@ -60,6 +61,7 @@ public class ModuleManager {
             plugin.getCommand("speed").setExecutor(new Speed(plugin));
             plugin.getCommand("xp").setExecutor(new XPCommand(plugin));
             plugin.getCommand("playerinfo").setExecutor(new PlayerInfo(plugin));
+            plugin.getCommand("nickname").setExecutor(new Nickname(plugin));
 
             Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Loaded <light_purple>player_control<white> module.", Placeholder.parsed("prefix", plugin.internalPrefix)));
 
