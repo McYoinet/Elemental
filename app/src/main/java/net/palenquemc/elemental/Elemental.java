@@ -27,7 +27,6 @@ public class Elemental extends JavaPlugin {
     public ConfigurationManager config = new ConfigurationManager(this);
 
     public HashMap<String, String> tpRequests = new HashMap<>();
-    public HashMap<String, String> nicknames = new HashMap<>();
 
     @Override
     public void onEnable() {

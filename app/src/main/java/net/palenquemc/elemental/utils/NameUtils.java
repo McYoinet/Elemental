@@ -1,6 +1,8 @@
 package net.palenquemc.elemental.utils;
 
 
+import java.util.HashMap;
+
 import org.bukkit.entity.Player;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -16,19 +18,25 @@ public class NameUtils {
 
     MiniMessage mm = MiniMessage.miniMessage();
 
+    public HashMap<String, String> nicknames = new HashMap<>();
+
+    public HashMap<String, String> getNicknamesHashMap() {
+        return nicknames;
+    }
+
     public boolean isNickname(String target) {
-        return plugin.nicknames.containsValue(target);
+        return this.nicknames.containsValue(target);
     }
 
     public boolean hasNickname(String target) {
-        return plugin.nicknames.containsKey(target);
+        return this.nicknames.containsKey(target);
     }
 
     public String getRealName(String target) {
         if(isNickname(target)) {
             StringBuilder realname = new StringBuilder();
 
-            plugin.nicknames.forEach((playername, nick) -> {
+            this.nicknames.forEach((playername, nick) -> {
                 realname.append(playername);
             });
 
@@ -38,7 +46,7 @@ public class NameUtils {
 
     public String getNickname(String target) {
         if(hasNickname(target)) {
-            return plugin.nicknames.get(target);
+            return this.nicknames.get(target);
         } else return null;
     }
 
@@ -57,7 +65,7 @@ public class NameUtils {
 
         if(!isNickname(nickname)) {
 
-            plugin.nicknames.put(target, nickname);
+            this.nicknames.put(target, nickname);
 
             Player player = plugin.getServer().getPlayer(target);
 
@@ -72,7 +80,7 @@ public class NameUtils {
 
     public boolean clearNickname(String target) {
         if(hasNickname(target)) {
-            plugin.nicknames.remove(target);
+            this.nicknames.remove(target);
 
             Player player = plugin.getServer().getPlayer(target);
 

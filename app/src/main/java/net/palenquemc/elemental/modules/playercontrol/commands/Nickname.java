@@ -112,6 +112,12 @@ public class Nickname implements TabExecutor {
                         Player player = (Player) sender;
                         String nickname = args[1];
 
+                        if(nickname.equals(player.getName())) {
+                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.nickname_must_not_be_name.self")));
+                        
+                            return true;
+                        }
+
                         if(names.containsTags(nickname)) {
                             sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.no_tags_allowed")));
 
@@ -203,6 +209,12 @@ public class Nickname implements TabExecutor {
 
                         String target = args[1];
                         String nick = args[2];
+
+                        if(target.equals(nick)) {
+                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.nickname_must_not_be_name.other")));
+                        
+                            return true;
+                        }
 
                         if(names.containsTags(nick)) {
                             sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.no_tags_allowed")));
