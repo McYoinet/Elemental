@@ -140,6 +140,7 @@ player_control_module:
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/nickname <aqua><set | get> <nickname | player> [player]
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/nickname <aqua>set NewNickname Player1
     already_in_use: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>That nickname is already in use, or is the name of another player."
+    no_tags_allowed: "<dark_grey>[<red>Elemental<dark_grey>] <white>You can't use tag symbols in nicknames."
     set:
       self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your nickname was set to <light_purple><nickname><white>."
       to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><target_player><white>'s nickname was set to <light_purple><nickname><white>."

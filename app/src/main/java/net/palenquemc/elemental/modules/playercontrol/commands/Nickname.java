@@ -112,6 +112,12 @@ public class Nickname implements TabExecutor {
                         Player player = (Player) sender;
                         String nickname = args[1];
 
+                        if(names.containsTags(nickname)) {
+                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.no_tags_allowed")));
+
+                            return true; 
+                        }
+
                         boolean success = names.setNickname(player.getName(), nickname);
 
                         if(success) {
@@ -197,6 +203,12 @@ public class Nickname implements TabExecutor {
 
                         String target = args[1];
                         String nick = args[2];
+
+                        if(names.containsTags(nick)) {
+                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.no_tags_allowed")));
+
+                            return true; 
+                        }
 
                         Player targetPlayer = plugin.getServer().getPlayer(target);
 
