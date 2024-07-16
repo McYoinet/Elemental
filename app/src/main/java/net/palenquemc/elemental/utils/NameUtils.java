@@ -10,7 +10,7 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
 
 public class NameUtils {
-    private Elemental plugin;
+    private final Elemental plugin;
 
     public NameUtils(Elemental plugin) {
         this.plugin = plugin;
@@ -18,26 +18,26 @@ public class NameUtils {
 
     MiniMessage mm = MiniMessage.miniMessage();
 
-    public HashMap<String, String> nicknames = new HashMap<>();
-
     public HashMap<String, String> getNicknamesHashMap() {
-        return nicknames;
+        return plugin.nicknames;
     }
 
     public boolean isNickname(String target) {
-        return this.nicknames.containsValue(target);
+        return plugin.nicknames.containsValue(target);
     }
 
     public boolean hasNickname(String target) {
-        return this.nicknames.containsKey(target);
+        return plugin.nicknames.containsKey(target);
     }
 
     public String getRealName(String target) {
         if(isNickname(target)) {
             StringBuilder realname = new StringBuilder();
 
-            this.nicknames.forEach((playername, nick) -> {
-                realname.append(playername);
+            plugin.nicknames.forEach((playername, nick) -> {
+                if(target.equals(nick)) {
+                    realname.append(playername);
+                }
             });
 
             return realname.toString();
@@ -46,7 +46,7 @@ public class NameUtils {
 
     public String getNickname(String target) {
         if(hasNickname(target)) {
-            return this.nicknames.get(target);
+            return plugin.nicknames.get(target);
         } else return null;
     }
 
@@ -65,7 +65,7 @@ public class NameUtils {
 
         if(!isNickname(nickname)) {
 
-            this.nicknames.put(target, nickname);
+            plugin.nicknames.put(target, nickname);
 
             Player player = plugin.getServer().getPlayer(target);
 
@@ -80,7 +80,7 @@ public class NameUtils {
 
     public boolean clearNickname(String target) {
         if(hasNickname(target)) {
-            this.nicknames.remove(target);
+            plugin.nicknames.remove(target);
 
             Player player = plugin.getServer().getPlayer(target);
 

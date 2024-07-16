@@ -153,3 +153,4 @@ permissions:
       elemental.nickname.get.self: true
       elemental.nickname.set.others: true
       elemental.nickname.get.others: true
+      elemental.nickname.get.list: true

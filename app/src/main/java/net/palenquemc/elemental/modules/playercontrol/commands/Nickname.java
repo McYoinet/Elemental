@@ -37,7 +37,7 @@ public class Nickname implements TabExecutor {
         }
 
         switch(args.length) {
-            // Cases: /nickname get {self} & /nickname clear {self}
+            // Cases: /nickname get {self} & /nickname clear {self} & /nickname list
             case 1 -> {
                 if(!(sender instanceof Player)) {
                     sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
@@ -84,6 +84,34 @@ public class Nickname implements TabExecutor {
                             sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.clear.self")));
 
                             return true;
+                        }
+                    }
+
+                    case "list" -> {
+                        if(!sender.hasPermission("elmental.nickname.get.list")) {
+                            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+                            
+                            return true;
+                        }
+
+                        if(names.getNicknamesHashMap().isEmpty()) {
+                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.list.no_nicknames_are_being_used")));
+
+                            return true;
+                        }
+
+                        sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.list.list_header")));
+
+                        String entryFormat = playerControl.getString("player_control_module.nickname.get_nick.list.list_entry");
+
+                        names.getNicknamesHashMap().forEach((playername, nickname) -> {
+                            sender.sendMessage(mm.deserialize(entryFormat, Placeholder.unparsed("player", playername), Placeholder.parsed("nickname", nickname)));
+                        });
+
+                        String listFooter = playerControl.getString("player_control_module.nickname.get_nick.list.list_footer");
+
+                        if(!listFooter.equals("")) {
+                            sender.sendMessage(mm.deserialize(listFooter));
                         }
                     }
 
@@ -150,6 +178,10 @@ public class Nickname implements TabExecutor {
                                 sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.get.other"), Placeholder.parsed("target_player", targetPlayer.getName()), Placeholder.parsed("nickname", names.getNickname(target))));
                                 
                                 return true;
+                            } else if(names.isNickname(target)) {
+                                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.get.belongs_to"), Placeholder.parsed("target_player", names.getRealName(target)), Placeholder.parsed("nickname", names.getNickname(names.getRealName(target)))));
+                            
+                                return true;
                             } else {
                                 sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.no_nickname.other"), Placeholder.parsed("target_player", targetPlayer.getName())));
                                 
@@ -159,6 +191,10 @@ public class Nickname implements TabExecutor {
                             if(names.isNickname(target)) {
                                 sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.get.belongs_to"), Placeholder.parsed("target_player", names.getRealName(target)), Placeholder.parsed("nickname", names.getNickname(names.getRealName(target)))));
                             
+                                return true;
+                            } else if(names.hasNickname(target)){
+                                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.get.other"), Placeholder.parsed("target_player", target), Placeholder.parsed("nickname", names.getNickname(target))));
+                                
                                 return true;
                             } else {
                                 sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.get.not_in_use"), Placeholder.parsed("nickname", target)));
@@ -178,9 +214,11 @@ public class Nickname implements TabExecutor {
                         String target = args[1];
 
                         if(names.hasNickname(target)) {
+                            String nickname = names.getNickname(target);
+
                             names.clearNickname(target);
                             
-                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.clear.to_other"), Placeholder.unparsed("target_player", args[1])));
+                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.clear.to_other"), Placeholder.unparsed("target_player", target), Placeholder.parsed("nickname", nickname)));
                             
                             Player targetPlayer = plugin.getServer().getPlayer(target);
                             
@@ -188,6 +226,14 @@ public class Nickname implements TabExecutor {
                                 targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.clear.by_other"), Placeholder.unparsed("command_sender", sender.getName())));
                             }
 
+                            return true;
+                        } else if(names.isNickname(target)) {
+                            String realname = names.getRealName(target);
+
+                            names.clearNickname(realname);
+
+                            sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.clear.to_other"), Placeholder.unparsed("target_player", realname), Placeholder.unparsed("nickname", target)));
+                        
                             return true;
                         } else {
                             sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.nickname.get_nick.no_nickname.other"), Placeholder.parsed("target_player", target)));
@@ -270,6 +316,7 @@ public class Nickname implements TabExecutor {
 
             case 2 -> {
                 arguments.add("[nickname]");
+                arguments.add("[player]");
                 
                 plugin.getServer().getOnlinePlayers().forEach(player -> {
                     arguments.add(player.getName());

@@ -136,6 +136,7 @@ player_control_module:
 
   nickname:
     keep_nickname_after_disconnect: true
+    keep_disabled: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><target_player> <white>is not online, and the keep nickname feature is disabled, therefore the nickname change won't be applied when they join the server."
     usage: |-
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/nickname <aqua><set | get> <nickname | player> [player]
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/nickname <aqua>set NewNickname Player1
@@ -154,12 +155,16 @@ player_control_module:
         other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s nickname is <light_purple><nickname><white>."
         belongs_to: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Nickname <light_purple><nickname><white> belongs to <light_purple><target_player><white>."
         not_in_use: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Nickname <light_purple><nickname><white> is not being used by anyone."
+      list:
+        list_header:  "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>The following players are using nicknames:"
+        list_entry: "<dark_grey>[<#00e580>Elemental<dark_grey>] <grey>- <light_purple><player> <white>is using the nickname <light_purple><nickname><white>."
+        list_footer: ""
+        no_nicknames_are_being_used: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>There are no players using a nickname."
       no_nickname:
         self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You have no nickname set."
         other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><target_player><white> has no nickname set."
     get_name: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white>'s real name is <light_purple><realname><white>."
     clear:
       self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Your nickname was cleared."
-      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You cleared <light_purple><target_player><white>'s nickname."
+      to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You cleared <light_purple><target_player><white>'s nickname, which was <light_purple><nickname><white>."
       by_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><command_sender> <white>cleared your nickname."
-    keep_disabled: "<dark_grey>[<#00e580>Elemental<dark_grey>] <light_purple><target_player> <white>is not online, and the keep nickname feature is disabled, therefore the nickname change won't be applied when they join the server."
