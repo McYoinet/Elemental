@@ -70,6 +70,13 @@ public class NameUtils {
             Player player = plugin.getServer().getPlayer(target);
 
             if(player != null) {
+                /* 
+                 * Applying nicknames in this way, ie replacing them in Placeholders
+                 * with the unparsed method, prevents issues when using MiniMessage tags in them
+                 * Also if the nickname had tag colors (like <red>) they'd still be displayed in color
+                 * with MiniMessage supporting chat plugins, as it sends them directly as <tag>Nickname
+                */
+
                 player.displayName(mm.deserialize("<nickname>", Placeholder.unparsed("nickname", nickname)));
                 player.playerListName(mm.deserialize("<nickname>", Placeholder.unparsed("nickname", nickname)));
             }

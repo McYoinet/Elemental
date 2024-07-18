@@ -19,7 +19,10 @@ import net.palenquemc.elemental.modules.playercontrol.commands.Nickname;
 import net.palenquemc.elemental.modules.playercontrol.commands.PlayerInfo;
 import net.palenquemc.elemental.modules.playercontrol.commands.Speed;
 import net.palenquemc.elemental.modules.playercontrol.commands.XPCommand;
+import net.palenquemc.elemental.modules.playercontrol.events.NicknameApplyJoin;
+import net.palenquemc.elemental.modules.playercontrol.events.NicknameRemoveLeave;
 import net.palenquemc.elemental.modules.servercontrol.commands.Broadcast;
+import net.palenquemc.elemental.modules.servercontrol.commands.ListCommand;
 import net.palenquemc.elemental.modules.spawn.commands.SetSpawn;
 import net.palenquemc.elemental.modules.spawn.commands.Spawn;
 import net.palenquemc.elemental.modules.spawn.events.PlayerJoinListener;
@@ -63,6 +66,9 @@ public class ModuleManager {
             plugin.getCommand("playerinfo").setExecutor(new PlayerInfo(plugin));
             plugin.getCommand("nickname").setExecutor(new Nickname(plugin));
 
+            plugin.getServer().getPluginManager().registerEvents(new NicknameApplyJoin(plugin), plugin);
+            plugin.getServer().getPluginManager().registerEvents(new NicknameRemoveLeave(plugin), plugin);
+
             Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Loaded <light_purple>player_control<white> module.", Placeholder.parsed("prefix", plugin.internalPrefix)));
 
             return true;
@@ -76,6 +82,7 @@ public class ModuleManager {
 
         if(modules.getBoolean("modules.server_control")) {
             plugin.getCommand("broadcast").setExecutor(new Broadcast(plugin));
+            plugin.getCommand("list").setExecutor(new ListCommand(plugin));
 
             Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Loaded <light_purple>server_control<white> module.", Placeholder.parsed("prefix", plugin.internalPrefix)));
 

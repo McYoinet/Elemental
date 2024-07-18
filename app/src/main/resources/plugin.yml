@@ -67,6 +67,8 @@ commands:
   nickname:
     description: Manages the nickname of a player.
     aliases: [nick]
+  list:
+    description: Gets a list of the players in the server.
 
 # Permissions
 permissions:
@@ -154,3 +156,6 @@ permissions:
       elemental.nickname.set.others: true
       elemental.nickname.get.others: true
       elemental.nickname.get.list: true
+  elemental.list:
+    description: Allows to see the list of players in the server.
+    default: op
