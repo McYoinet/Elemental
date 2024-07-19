@@ -7,6 +7,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
 import net.palenquemc.elemental.modules.core.commands.ElementalCommand;
+import net.palenquemc.elemental.modules.info.commands.Help;
 import net.palenquemc.elemental.modules.playercontrol.commands.ClearInventory;
 import net.palenquemc.elemental.modules.playercontrol.commands.Feed;
 import net.palenquemc.elemental.modules.playercontrol.commands.Fly;
@@ -72,9 +73,7 @@ public class ModuleManager {
             Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Loaded <light_purple>player_control<white> module.", Placeholder.parsed("prefix", plugin.internalPrefix)));
 
             return true;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     private boolean loadServerControlModule() {
@@ -87,9 +86,7 @@ public class ModuleManager {
             Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Loaded <light_purple>server_control<white> module.", Placeholder.parsed("prefix", plugin.internalPrefix)));
 
             return true;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     private boolean loadSpawnModule() {
@@ -106,9 +103,7 @@ public class ModuleManager {
             Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Loaded <light_purple>spawn<white> module.", Placeholder.parsed("prefix", plugin.internalPrefix)));
 
             return true;
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     private boolean loadTeleportModule() {
@@ -124,9 +119,17 @@ public class ModuleManager {
             Bukkit.getConsoleSender().sendMessage(mm.deserialize("<prefix> Loaded <light_purple>teleport<white> module.", Placeholder.parsed("prefix", plugin.internalPrefix)));
 
             return true;
-        } else {
-            return false;
-        }
+        } else return false;
+    }
+
+    private boolean loadHelpModule() {
+        FileConfiguration modules = plugin.config.getConfig("modules.yml");
+
+        if(modules.getBoolean("modules.info")) {
+            plugin.getCommand("help").setExecutor(new Help(plugin));
+
+            return true;
+        } else return false;
     }
 
     public void loadModules() {
@@ -135,5 +138,6 @@ public class ModuleManager {
         loadServerControlModule();
         loadSpawnModule();
         loadTeleportModule();
+        loadHelpModule();
     }
 }

@@ -72,6 +72,8 @@ commands:
     aliases: [nick]
   list:
     description: Gets a list of the players in the server.
+  help:
+    description: Gets a helpful message.
 
 # Permissions
 permissions:

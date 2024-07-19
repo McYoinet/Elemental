@@ -31,6 +31,7 @@ public class ConfigurationManager {
         configs.put("server_control.yml", new YamlConfiguration());
         configs.put("spawn.yml", new YamlConfiguration());
         configs.put("teleport.yml", new YamlConfiguration());
+        configs.put("info.yml", new YamlConfiguration());
 
         configs.forEach((filename, config) -> {
             File file = new File(plugin.getDataFolder(), filename);

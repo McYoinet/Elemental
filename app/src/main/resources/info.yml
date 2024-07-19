@@ -1,0 +1,12 @@
+info_module:
+  help_command:
+    usage: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/help <aqua>[page]
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/help <aqua>social
+    message: |-
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>This is a helpful message from the server.
+      <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Contact a Staff if you need anything!
+    unknown_page: <dark_grey>[<red>Elemental<dark_grey>] <white>Unknown help page.
+    subcommands:
+      social: |-
+        <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Visit us through our social media!
