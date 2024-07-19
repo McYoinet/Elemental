@@ -40,8 +40,8 @@ public class Broadcast implements TabExecutor {
         String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
         String missingMessage = chat.papi(player, serverControl.getString("server_control_module.broadcast.missing_message"));
         String broadcast = chat.papi(player, serverControl.getString("server_control_module.broadcast.broadcast"));
-        String pathTitle = chat.papi(player, core.getString("server_control_module.broadcast.title.main_title"));
-        String pathSubtitle = chat.papi(player, core.getString("server_control_module.broadcast.title.subtitle"));
+        String pathTitle = chat.papi(player, serverControl.getString("server_control_module.broadcast.title.main_title"));
+        String pathSubtitle = chat.papi(player, serverControl.getString("server_control_module.broadcast.title.subtitle"));
 
         if(!sender.hasPermission("elmental.broadcast")) {
             sender.sendMessage(mm.deserialize(noPerms));
