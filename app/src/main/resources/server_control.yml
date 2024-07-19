@@ -16,7 +16,7 @@ server_control_module:
     usage: |-
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/list <aqua>[page number | world] [world page number]
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/list <aqua>Player1
-    list_header: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Players connected to the server (page <light_purple><page><white> out of <light_purple><total><white>):"
+    list_header: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>There are <light_purple><count><white> players connected to the server (page <light_purple><page><white> out of <light_purple><total><white>):"
     list_entry: "<light_purple><player>"
     separator: "<white>, "
     list_footer: ""

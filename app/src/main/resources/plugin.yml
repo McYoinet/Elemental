@@ -13,6 +13,9 @@ loadbefore: [FastAsyncWorldEdit, WorldEdit]
 author: McYoinet
 website: https://plugins.palenquemc.net/Elemental
 
+# Using PlaceholderAPI
+softdepend: [PlaceholderAPI]
+
 # Commands
 commands:
   elemental:

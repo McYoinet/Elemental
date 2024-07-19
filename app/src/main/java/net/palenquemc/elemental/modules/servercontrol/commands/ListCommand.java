@@ -15,6 +15,7 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.minimessage.tag.standard.StandardTags;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class ListCommand implements TabExecutor {
     private final Elemental plugin;
@@ -30,18 +31,24 @@ public class ListCommand implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration serverControl = plugin.config.getConfig("server_control.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String usage = chat.papi(player, serverControl.getString("server_control_module.list.usage"));
+        String listHeader = chat.papi(player, serverControl.getString("server_control_module.list.list_header"));
+        String listEntry = chat.papi(player, serverControl.getString("server_control_module.list.list_entry"));
+        String separator = chat.papi(player, serverControl.getString("server_control_module.list.separator"));
+        String listFooter = chat.papi(player, serverControl.getString("server_control_module.list.list_footer"));
+        String noPlayers = chat.papi(player, serverControl.getString("server_control_module.list.no_players_connected"));
+
         if(!sender.hasPermission("elmental.list")) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
             
             return true;
         }
-
-        String usage = serverControl.getString("server_control_module.list.usage");
-        String listHeader = serverControl.getString("server_control_module.list.list_header");
-        String listEntry = serverControl.getString("server_control_module.list.list_entry");
-        String separator = serverControl.getString("server_control_module.list.separator");
-        String listFooter = serverControl.getString("server_control_module.list.list_footer");
-        String noPlayers = serverControl.getString("server_control_module.list.no_players_connected");
 
         Collection<? extends Player> players = plugin.getServer().getOnlinePlayers();
 
@@ -77,7 +84,7 @@ public class ListCommand implements TabExecutor {
                     }
                 }
 
-                sender.sendMessage(mm.deserialize(listHeader, Placeholder.unparsed("page", "1"), Placeholder.unparsed("total", String.valueOf(playerLists.size()))));
+                sender.sendMessage(mm.deserialize(listHeader, Placeholder.unparsed("page", "1"), Placeholder.unparsed("total", String.valueOf(playerLists.size())), Placeholder.unparsed("count", String.valueOf(plugin.getServer().getOnlinePlayers().size()))));
                 sender.sendMessage(mm.deserialize(bodySerialized.toString()));
                 
                 if(!listFooter.equals("")) {

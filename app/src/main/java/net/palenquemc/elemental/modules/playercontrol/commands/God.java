@@ -12,10 +12,11 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class God implements TabExecutor {
 
-    private Elemental plugin;
+    private final Elemental plugin;
     
     public God(Elemental plugin) {
         this.plugin = plugin;
@@ -28,32 +29,47 @@ public class God implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String executableFromPlayer = chat.papi(player, core.getString("core_module.executable_from_player"));
+        String godDisableSelf = chat.papi(player, playerControl.getString("player_control_module.god.disable.self"));
+        String godEnableSelf = chat.papi(player, playerControl.getString("player_control_module.god.enable.self"));
+        String targetNotFound = chat.papi(player, core.getString("core_module.target_not_found"));
+        String usage = chat.papi(player, playerControl.getString("player_control_module.god.usage"));
+
+        String godDisableByOther = playerControl.getString("player_control_module.god.disable.by_other");
+        String godDisableToOther = playerControl.getString("player_control_module.god.disable.to_other");
+        String godEnableByOther = playerControl.getString("player_control_module.god.enable.by_other");
+        String godEnableToOther = playerControl.getString("player_control_module.god.enable.to_other");
+
         if(!sender.hasPermission("elmental.god")) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
             
             return true;
         }
 
         switch(args.length) {
             case 0 -> {
-                if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
+                if(player == null) {
+                    sender.sendMessage(mm.deserialize(executableFromPlayer));
 
                     return true;
                 }
 
-                Player player = (Player) sender;
-
                 if(player.isInvulnerable()) {
                     player.setInvulnerable(false);
 
-                    player.sendMessage(mm.deserialize(playerControl.getString("player_control_module.god.disable.self")));
+                    player.sendMessage(mm.deserialize(godDisableSelf));
 
                     return true;
                 } else {
                     player.setInvulnerable(true);
 
-                    player.sendMessage(mm.deserialize(playerControl.getString("player_control_module.god.enable.self")));
+                    player.sendMessage(mm.deserialize(godEnableSelf));
                 
                     return true;
                 }
@@ -63,13 +79,13 @@ public class God implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found")));
+                    sender.sendMessage(mm.deserialize(targetNotFound));
 
                     return true;
                 }
 
                 if(!sender.hasPermission("elemental.god.others")) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(noPerms));
                     
                     return true;
                 }
@@ -77,22 +93,28 @@ public class God implements TabExecutor {
                 if(targetPlayer.isInvulnerable()) {
                     targetPlayer.setInvulnerable(false);
 
-                    targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.god.disable.by_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
-                    sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.god.disable.to_other"), Placeholder.unparsed("command_sender", sender.getName())));
+                    godDisableByOther = chat.papi(targetPlayer, godDisableByOther);
+                    godDisableToOther = chat.papi(targetPlayer, godDisableToOther);
+
+                    targetPlayer.sendMessage(mm.deserialize(godDisableByOther, Placeholder.unparsed("target_player", targetPlayer.getName())));
+                    sender.sendMessage(mm.deserialize(godDisableToOther, Placeholder.unparsed("command_sender", sender.getName())));
 
                     return true;
                 } else {
                     targetPlayer.setInvulnerable(true);
 
-                    targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.god.enable.by_other"), Placeholder.unparsed("target_player", targetPlayer.getName())));
-                    sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.god.enable.to_other"), Placeholder.unparsed("command_sender", sender.getName())));
+                    godEnableByOther = chat.papi(targetPlayer, godEnableByOther);
+                    godEnableToOther = chat.papi(targetPlayer, godEnableToOther);
+
+                    targetPlayer.sendMessage(mm.deserialize(godEnableByOther, Placeholder.unparsed("target_player", targetPlayer.getName())));
+                    sender.sendMessage(mm.deserialize(godEnableToOther, Placeholder.unparsed("command_sender", sender.getName())));
 
                     return true;
                 }
             }
 
             default -> {
-                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.god.usage")));
+                sender.sendMessage(mm.deserialize(usage));
 
                 return true;
             }

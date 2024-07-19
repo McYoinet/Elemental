@@ -13,9 +13,10 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class WorldCommand implements TabExecutor {
-    private Elemental plugin;
+    private final Elemental plugin;
     
     public WorldCommand(Elemental plugin) {
         this.plugin = plugin;
@@ -28,14 +29,29 @@ public class WorldCommand implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String usage = chat.papi(player, teleport.getString("teleport_module.world.usage"));
+        String worldNotFound = chat.papi(player, teleport.getString("teleport_module.world.world_not_found"));
+        String executableFromPlayer = chat.papi(player, core.getString("core_module.executable_from_player"));
+        String worldChangedSelf = chat.papi(player, teleport.getString("teleport_module.world.world_changed.self"));
+        String targetNotFound = chat.papi(player, core.getString("core_module.target_not_found"));
+
+        String worldChangedToOther = teleport.getString("teleport_module.world.world_changed.to_other");
+        String worldChangedByOther = teleport.getString("teleport_module.world.world_changed.by_other");
+
         if(!sender.hasPermission("elemental.teleport")) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
             
             return true;
         }
 
         if(args.length < 1) {
-            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.usage")));
+            sender.sendMessage(mm.deserialize(usage));
             
             return true;
         }
@@ -45,25 +61,23 @@ public class WorldCommand implements TabExecutor {
             World world = plugin.getServer().getWorld(worldname);
 
             if(plugin.getServer().getWorld(worldname) == null) {
-                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_not_found"), Placeholder.unparsed("world", worldname)));
+                sender.sendMessage(mm.deserialize(worldNotFound, Placeholder.unparsed("world", worldname)));
 
                 return true;
             }
             
             if(args.length == 1) {
-                if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
+                if(player == null) {
+                    sender.sendMessage(mm.deserialize(executableFromPlayer));
     
                     return true;
                 }
     
-                Player player = (Player) sender;
-    
                 player.teleport(world.getSpawnLocation());
-                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_changed.self"), Placeholder.unparsed("world", worldname)));
+                sender.sendMessage(mm.deserialize(worldChangedSelf, Placeholder.unparsed("world", worldname)));
             } else if(args.length == 2) {
                 if(!sender.hasPermission("elemental.teleport.others")) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(noPerms));
     
                     return true;
                 }
@@ -71,19 +85,22 @@ public class WorldCommand implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[1]);
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found"), Placeholder.unparsed("target_player", args[1])));
+                    sender.sendMessage(mm.deserialize(targetNotFound, Placeholder.unparsed("target_player", args[1])));
                     
                     return true;
                 }
 
                 targetPlayer.teleport(world.getSpawnLocation());
+
+                worldChangedByOther = chat.papi(targetPlayer, worldChangedByOther);
+                worldChangedToOther = chat.papi(targetPlayer, worldChangedToOther);
                 
-                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_changed.to_other"), Placeholder.unparsed("target_player", args[1]), Placeholder.unparsed("world", args[0])));
-                targetPlayer.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.world_changed.by_other"), Placeholder.unparsed("world", worldname), Placeholder.unparsed("command_sender", sender.getName())));
+                sender.sendMessage(mm.deserialize(worldChangedToOther, Placeholder.unparsed("target_player", args[1]), Placeholder.unparsed("world", args[0])));
+                targetPlayer.sendMessage(mm.deserialize(worldChangedByOther, Placeholder.unparsed("world", worldname), Placeholder.unparsed("command_sender", sender.getName())));
 
                 return true;
             } else if(args.length > 2) {
-                sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.world.usage")));
+                sender.sendMessage(mm.deserialize(usage));
 
                 return true;
             }

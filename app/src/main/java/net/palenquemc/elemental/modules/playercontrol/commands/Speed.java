@@ -12,9 +12,10 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class Speed implements TabExecutor {
-    private Elemental plugin;
+    private final Elemental plugin;
     
     public Speed(Elemental plugin) {
         this.plugin = plugin;
@@ -27,25 +28,42 @@ public class Speed implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String executableFromPlayer = chat.papi(player, core.getString("core_module.executable_from_player"));
+        String invalidValue = chat.papi(player, playerControl.getString("player_control_module.speed.invalid_value"));
+        String setFlyingSelf = chat.papi(player, playerControl.getString("player_control_module.speed.set.flying.self"));
+        String setWalkingSelf = chat.papi(player, playerControl.getString("player_control_module.speed.set.walking.self"));
+        String targetNotFound = chat.papi(player, core.getString("core_module.target_not_found"));
+        String usage = chat.papi(player, playerControl.getString("player_control_module.speed.usage"));
+
+        String setFlyingByOther = playerControl.getString("player_control_module.speed.set.flying.by_other");
+        String setFlyingToOther = playerControl.getString("player_control_module.speed.set.flying.to_other");
+        String setWalkingByOther = playerControl.getString("player_control_module.speed.set.walking.by_other");
+        String setWalkingToOther = playerControl.getString("player_control_module.speed.set.walking.to_other");
+
         if(!sender.hasPermission("elmental.speed")) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
             
             return true;
         }
 
         switch(args.length) {
             case 1 -> {
-                if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
+                if(player == null) {
+                    sender.sendMessage(mm.deserialize(executableFromPlayer));
 
                     return true;
                 }
 
-                Player player = (Player) sender;
                 float speed = (float) Double.parseDouble(args[0]);
 
                 if(speed < 1 || speed > 10) {
-                    sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.invalid_value")));
+                    sender.sendMessage(mm.deserialize(invalidValue));
 
                     return true;
                 }
@@ -55,13 +73,13 @@ public class Speed implements TabExecutor {
                 if(player.isFlying()) {
                     player.setFlySpeed(processedSpeed);
 
-                    player.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.set.flying.self"), Placeholder.unparsed("amount", String.valueOf(speed))));
+                    player.sendMessage(mm.deserialize(setFlyingSelf, Placeholder.unparsed("amount", String.valueOf(speed))));
 
                     return true;
                 } else {
                     player.setWalkSpeed(processedSpeed);
 
-                    player.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.set.walking.self"), Placeholder.unparsed("amount", String.valueOf(speed))));
+                    player.sendMessage(mm.deserialize(setWalkingSelf, Placeholder.unparsed("amount", String.valueOf(speed))));
                 
                     return true;
                 }
@@ -72,19 +90,19 @@ public class Speed implements TabExecutor {
                 Player targetPlayer = plugin.getServer().getPlayer(args[1]);
 
                 if(!sender.hasPermission("elemental.speed.others")) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+                    sender.sendMessage(mm.deserialize(noPerms));
                     
                     return true;
                 }
                 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.target_not_found")));
+                    sender.sendMessage(mm.deserialize(targetNotFound));
 
                     return true;
                 }
 
                 if(speed < 1 || speed > 10) {
-                    sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.invalid_value")));
+                    sender.sendMessage(mm.deserialize(invalidValue));
 
                     return true;
                 }
@@ -94,22 +112,28 @@ public class Speed implements TabExecutor {
                 if(targetPlayer.isFlying()) {
                     targetPlayer.setFlySpeed(processedSpeed);
 
-                    targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.set.flying.by_other"), Placeholder.unparsed("command_sender", sender.getName()), Placeholder.unparsed("amount", String.valueOf(speed))));
-                    sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.set.flying.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName()), Placeholder.unparsed("amount", String.valueOf(speed))));
+                    setFlyingByOther = chat.papi(targetPlayer, setFlyingByOther);
+                    setFlyingToOther = chat.papi(targetPlayer, setFlyingToOther);
+
+                    targetPlayer.sendMessage(mm.deserialize(setFlyingByOther, Placeholder.unparsed("command_sender", sender.getName()), Placeholder.unparsed("amount", String.valueOf(speed))));
+                    sender.sendMessage(mm.deserialize(setFlyingToOther, Placeholder.unparsed("target_player", targetPlayer.getName()), Placeholder.unparsed("amount", String.valueOf(speed))));
 
                     return true;
                 } else {
                     targetPlayer.setWalkSpeed(processedSpeed);
 
-                    targetPlayer.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.set.walking.by_other"), Placeholder.unparsed("command_sender", sender.getName()), Placeholder.unparsed("amount", String.valueOf(speed))));
-                    sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.set.walking.to_other"), Placeholder.unparsed("target_player", targetPlayer.getName()), Placeholder.unparsed("amount", String.valueOf(speed))));
+                    setWalkingByOther = chat.papi(targetPlayer, setWalkingByOther);
+                    setWalkingToOther = chat.papi(targetPlayer, setWalkingToOther);
+
+                    targetPlayer.sendMessage(mm.deserialize(setWalkingByOther, Placeholder.unparsed("command_sender", sender.getName()), Placeholder.unparsed("amount", String.valueOf(speed))));
+                    sender.sendMessage(mm.deserialize(setWalkingToOther, Placeholder.unparsed("target_player", targetPlayer.getName()), Placeholder.unparsed("amount", String.valueOf(speed))));
 
                     return true;
                 }
             }
 
             default -> {
-                sender.sendMessage(mm.deserialize(playerControl.getString("player_control_module.speed.usage")));
+                sender.sendMessage(mm.deserialize(usage));
 
                 return true;
             }

@@ -13,9 +13,10 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class Back implements TabExecutor {
-    private Elemental plugin;
+    private final Elemental plugin;
     
     public Back(Elemental plugin) {
         this.plugin = plugin;
@@ -28,22 +29,32 @@ public class Back implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String executableFromPlayer = chat.papi(player, core.getString("core_module.executable_from_player"));
+        String usage = chat.papi(player, teleport.getString("teleport_module.back.usage"));
+        String noDeathsFound = chat.papi(player, teleport.getString("teleport_module.back.no_deaths_found"));
+        String worldNotFound = chat.papi(player, teleport.getString("teleport_module.back.world_not_found"));
+        String teleported = chat.papi(player, teleport.getString("teleport_module.back.teleported"));
+
         if(!sender.hasPermission("elemental.teleport.back")) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
             
             return true;
         }
 
-        if(!(sender instanceof Player)) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
+        if(player == null) {
+            sender.sendMessage(mm.deserialize(executableFromPlayer));
 
             return true;
         }
 
-        Player player = (Player) sender;
-
         if(args.length > 0) {
-            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.back.usage")));
+            sender.sendMessage(mm.deserialize(usage));
 
             return true;
         }
@@ -51,13 +62,13 @@ public class Back implements TabExecutor {
         Location loc = player.getLastDeathLocation();
 
         if(loc == null) {
-            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.back.no_deaths_found")));
+            sender.sendMessage(mm.deserialize(noDeathsFound));
 
             return true;
         }
 
         if(loc.getWorld() == null) {
-            sender.sendMessage(mm.deserialize(teleport.getString("teleport_module.back.world_not_found")));
+            sender.sendMessage(mm.deserialize(worldNotFound));
 
             return true;
         }
@@ -67,7 +78,7 @@ public class Back implements TabExecutor {
 
         player.teleport(loc);
 
-        player.sendMessage(mm.deserialize(teleport.getString("teleport_module.back.teleported"), Placeholder.unparsed("target_destination", targetDestination), Placeholder.unparsed("world", world)));
+        player.sendMessage(mm.deserialize(teleported, Placeholder.unparsed("target_destination", targetDestination), Placeholder.unparsed("world", world)));
 
         return true;
     }

@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class Spawn implements TabExecutor {
     private Elemental plugin;
@@ -29,25 +30,33 @@ public class Spawn implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String executableFromPlayer = chat.papi(player, core.getString("core_module.executable_from_player"));
+        String worldNotFound = chat.papi(player, spawn.getString("spawn_module.messages.world_not_found"));
+        String teleported = chat.papi(player, spawn.getString("spawn_module.messages.teleported"));
+
         if(!sender.hasPermission("elmental.spawn")) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
             
             return true;
         }
 
-        if(!(sender instanceof Player)) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
+        if(player == null) {
+            sender.sendMessage(mm.deserialize(executableFromPlayer));
         
             return true;
         }
-
-        Player player = (Player) sender;
 
         String worldname = spawn.getString("spawn_module.spawn.location.world");
         World world = plugin.getServer().getWorld(worldname);
 
         if(world == null) {
-            player.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.world_not_found"), Placeholder.unparsed("world", worldname)));
+            player.sendMessage(mm.deserialize(worldNotFound, Placeholder.unparsed("world", worldname)));
 
             return true;
         }
@@ -62,7 +71,7 @@ public class Spawn implements TabExecutor {
         Location spawnpoint = new Location(world, x, y, z, yaw, pitch);
 
         player.teleport(spawnpoint);
-        player.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.teleported")));
+        player.sendMessage(mm.deserialize(teleported));
 
         return true;
     }

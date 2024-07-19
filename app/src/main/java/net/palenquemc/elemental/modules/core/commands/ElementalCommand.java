@@ -8,6 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -15,6 +16,7 @@ import net.palenquemc.elemental.Elemental;
 import net.palenquemc.elemental.modules.core.commands.subcommands.PathTest;
 import net.palenquemc.elemental.modules.core.commands.subcommands.Reload;
 import net.palenquemc.elemental.modules.core.commands.subcommands.Subhelp;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class ElementalCommand implements TabExecutor {
     private final Elemental plugin;
@@ -39,14 +41,23 @@ public class ElementalCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         FileConfiguration core = plugin.config.getConfig("core.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String info = chat.papi(player, core.getString("core_module.plugin_info"));
+        String unknownSubcommand = chat.papi(player, core.getString("core_module.unknown_subcommand"));
+
         if(args.length == 0) {
             if(!sender.hasPermission("elemental.plugininfo")) {
-                sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+                sender.sendMessage(mm.deserialize(noPerms));
                 
                 return false;
             }
 
-            sender.sendMessage(mm.deserialize(core.getString("core_module.plugin_info"), Placeholder.unparsed("version", plugin.version)));
+            sender.sendMessage(mm.deserialize(info, Placeholder.unparsed("version", plugin.version)));
             
             return true;
         } else if(args.length >= 1 && subcommands.containsKey(args[0])){
@@ -54,7 +65,7 @@ public class ElementalCommand implements TabExecutor {
             
             return result;
         } else {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.unknown_subcommand")));
+            sender.sendMessage(mm.deserialize(unknownSubcommand));
             return false;
         }
     }

@@ -6,12 +6,14 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
 import net.palenquemc.elemental.modules.core.commands.SubcommandTemplate;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class PathTest implements SubcommandTemplate {
     private final Elemental plugin;
@@ -53,16 +55,27 @@ public class PathTest implements SubcommandTemplate {
 
     @Override
     public boolean execute(CommandSender sender, Command command, String[] args) {
+        ChatUtils chat = new ChatUtils();
+
         FileConfiguration core = plugin.config.getConfig("core.yml");
 
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String usage = chat.papi(player, core.getString("core_module.path_test.usage"));
+        String fileNotFound = chat.papi(player, core.getString("core_module.path_test.file_not_found"));
+        String pathNotFound = chat.papi(player, core.getString("core_module.path_test.path_not_found"));
+        String pathFound = chat.papi(player, core.getString("core_module.path_test.path_found"));
+
         if(!sender.hasPermission(permission())) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
         
             return false;
         }
 
         if(args.length != 3) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.path_test.usage")));
+            sender.sendMessage(mm.deserialize(usage));
         
             return false;
         }
@@ -71,13 +84,13 @@ public class PathTest implements SubcommandTemplate {
         String path = args[2];
 
         if(!plugin.config.getConfigHashMap().containsKey(file)) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.path_test.file_not_found"), Placeholder.unparsed("file", file)));
+            sender.sendMessage(mm.deserialize(fileNotFound, Placeholder.unparsed("file", file)));
             
             return false;
         }
 
         if(!core.getKeys(true).contains(path)) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.path_test.path_not_found"), Placeholder.unparsed("path", path), Placeholder.unparsed("file", file)));
+            sender.sendMessage(mm.deserialize(pathNotFound, Placeholder.unparsed("path", path), Placeholder.unparsed("file", file)));
             
             return false;
         }
@@ -85,7 +98,7 @@ public class PathTest implements SubcommandTemplate {
         FileConfiguration chosenConfig = plugin.config.getConfig(file);
         Component value = mm.deserialize(chosenConfig.getString(path));
         
-        sender.sendMessage(mm.deserialize(core.getString("core_module.path_test.path_found"), Placeholder.unparsed("path", path), Placeholder.unparsed("file", file), Placeholder.component("path_value", value)));
+        sender.sendMessage(mm.deserialize(pathFound, Placeholder.unparsed("path", path), Placeholder.unparsed("file", file), Placeholder.component("path_value", value)));
 
         return true;
     }

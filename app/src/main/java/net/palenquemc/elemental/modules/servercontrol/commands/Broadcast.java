@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
@@ -15,9 +16,10 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.title.Title;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class Broadcast implements TabExecutor {
-    private Elemental plugin;
+    private final Elemental plugin;
     
     public Broadcast(Elemental plugin) {
         this.plugin = plugin;
@@ -30,21 +32,32 @@ public class Broadcast implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration serverControl = plugin.config.getConfig("server_control.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String missingMessage = chat.papi(player, serverControl.getString("server_control_module.broadcast.missing_message"));
+        String broadcast = chat.papi(player, serverControl.getString("server_control_module.broadcast.broadcast"));
+        String pathTitle = chat.papi(player, core.getString("server_control_module.broadcast.title.main_title"));
+        String pathSubtitle = chat.papi(player, core.getString("server_control_module.broadcast.title.subtitle"));
+
         if(!sender.hasPermission("elmental.broadcast")) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
             
             return true;
         }
 
         if(args.length < 1) {
-            sender.sendMessage(mm.deserialize(serverControl.getString("server_control_module.broadcast.missing_message")));
+            sender.sendMessage(mm.deserialize(missingMessage));
 
             return true;
         }
 
         String message = String.join(" ", args);
 
-        plugin.getServer().sendMessage(mm.deserialize(serverControl.getString("server_control_module.broadcast.broadcast"), Placeholder.parsed("message", message)));
+        plugin.getServer().sendMessage(mm.deserialize(broadcast, Placeholder.parsed("message", message)));
 
         if(core.getBoolean("server_control_module.broadcast.sound.enable")) {
             String source = core.getString("server_control_module.broadcast.sound.source");
@@ -59,8 +72,8 @@ public class Broadcast implements TabExecutor {
         }
 
         if(core.getBoolean("server_control_module.broadcast.title.enable")) {
-            Component mainTitle = mm.deserialize(core.getString("server_control_module.broadcast.title.main_title"), Placeholder.parsed("message", message));
-            Component subtitle = mm.deserialize(core.getString("server_control_module.broadcast.title.subtitle"), Placeholder.parsed("message", message));
+            Component mainTitle = mm.deserialize(pathTitle, Placeholder.parsed("message", message));
+            Component subtitle = mm.deserialize(pathSubtitle, Placeholder.parsed("message", message));
 
             Title title = Title.title(mainTitle, subtitle);
 

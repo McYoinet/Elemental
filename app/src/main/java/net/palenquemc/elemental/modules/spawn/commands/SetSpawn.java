@@ -13,10 +13,11 @@ import org.bukkit.entity.Player;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class SetSpawn implements TabExecutor {
 
-    private Elemental plugin;
+    private final Elemental plugin;
     
     public SetSpawn(Elemental plugin) {
         this.plugin = plugin;
@@ -29,21 +30,29 @@ public class SetSpawn implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String executableFromPlayer = chat.papi(player, core.getString("core_module.executable_from_player"));
+        String spawnSet = chat.papi(player, spawn.getString("spawn_module.messages.setspawn.set"));
+        String usage = chat.papi(player, spawn.getString("spawn_module.messages.setspawn.usage"));
+
         if(!sender.hasPermission("elmental.setspawn")) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
             
             return true;
         }
 
         switch (args.length) {
             case 0 -> {
-                if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
+                if(player == null) {
+                    sender.sendMessage(mm.deserialize(executableFromPlayer));
                     
                     return true;
                 }
-
-                Player player = (Player) sender;
 
                 Location loc = player.getLocation();
 
@@ -71,19 +80,17 @@ public class SetSpawn implements TabExecutor {
                 
                 String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
 
-                sender.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+                sender.sendMessage(mm.deserialize(spawnSet, Placeholder.unparsed("coordinates", coordinates)));
                 
                 return true;
             }
 
             case 3 -> {
-                if(!(sender instanceof Player)) {
-                    sender.sendMessage(mm.deserialize(core.getString("core_module.executable_from_player")));
+                if(player == null) {
+                    sender.sendMessage(mm.deserialize(executableFromPlayer));
                     
                     return true;
                 }
-
-                Player player = (Player) sender;
 
                 String worldname = player.getWorld().getName();
 
@@ -106,7 +113,7 @@ public class SetSpawn implements TabExecutor {
 
                 String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
 
-                sender.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+                sender.sendMessage(mm.deserialize(spawnSet, Placeholder.unparsed("coordinates", coordinates)));
 
                 return true;
             }
@@ -133,13 +140,13 @@ public class SetSpawn implements TabExecutor {
 
                 String coordinates = Double.toString(x) + ", " + Double.toString(y) + ", " + Double.toString(z);
 
-                sender.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.setspawn.set"), Placeholder.unparsed("coordinates", coordinates)));
+                sender.sendMessage(mm.deserialize(spawnSet, Placeholder.unparsed("coordinates", coordinates)));
 
                 return true;
             }
 
             default -> {
-                sender.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.setspawn.usage")));
+                sender.sendMessage(mm.deserialize(usage));
             
                 return true;
             }

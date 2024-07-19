@@ -17,6 +17,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.title.Title;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class PlayerJoinListener implements Listener {
 
@@ -32,11 +33,20 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
+        ChatUtils chat = new ChatUtils();
         Player player = event.getPlayer();
+
+        String playerMessage = chat.papi(player, spawn.getString("spawn_module.messages.player_join_actions.player_message.text"));
+        String serverMessage = chat.papi(player, spawn.getString("spawn_module.messages.player_join_actions.server_message.text"));
+        String invalidScope = chat.papi(player, spawn.getString("spawn_module.messages.invalid_scope"));
+        String pathTitle = chat.papi(player, spawn.getString("spawn_module.messages.player_join_actions.player_title.main_title"));
+        String pathSubtitle = chat.papi(player, spawn.getString("spawn_module.messages.player_join_actions.player_title.subtitle"));
+        String pathServerTitle = chat.papi(player, spawn.getString("spawn_module.messages.player_join_actions.server_title.main_title"));
+        String pathServerSubtitle = chat.papi(player, spawn.getString("spawn_module.messages.player_join_actions.server_title.subtitle"));
 
         // Player message
         if(spawn.getBoolean("spawn_module.messages.player_join_actions.player_message.enable")) {
-            player.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.player_join_actions.player_message.text"), Placeholder.unparsed("player", player.getName())));
+            player.sendMessage(mm.deserialize(playerMessage, Placeholder.unparsed("player", player.getName())));
         }
 
         // Server message
@@ -45,7 +55,7 @@ public class PlayerJoinListener implements Listener {
 
             switch(spawn.getString("spawn_module.messages.player_join_actions.server_message.scope")) {
                 case "world" -> {
-                    player.getWorld().sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.player_join_actions.server_message.text"), Placeholder.unparsed("player", player.getName())));
+                    player.getWorld().sendMessage(mm.deserialize(serverMessage, Placeholder.unparsed("player", player.getName())));
                 }
                 
                 case "global" -> {
@@ -53,21 +63,21 @@ public class PlayerJoinListener implements Listener {
                 
                     for(World world : plugin.getServer().getWorlds()) {
                         if(!blacklistedWorlds.contains(world.getName())) {
-                            world.sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.player_join_actions.server_message.text"), Placeholder.unparsed("player", player.getName())));
+                            world.sendMessage(mm.deserialize(serverMessage, Placeholder.unparsed("player", player.getName())));
                         }
                     }
                 }
 
                 default -> {
-                    Bukkit.getConsoleSender().sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.invalid_scope"), Placeholder.unparsed("path", "spawn_module.messages.player_join_actions.server_message.scope")));
+                    Bukkit.getConsoleSender().sendMessage(mm.deserialize(invalidScope, Placeholder.unparsed("path", "spawn_module.messages.player_join_actions.server_message.scope")));
                 }
             }
         }
 
         // Player title
         if(spawn.getBoolean("spawn_module.messages.player_join_actions.player_title.enable")) {
-            Component mainTitle = mm.deserialize(spawn.getString("spawn_module.messages.player_join_actions.player_title.main_title"), Placeholder.parsed("player", player.getName()));
-            Component subtitle = mm.deserialize(spawn.getString("spawn_module.messages.player_join_actions.player_title.subtitle"), Placeholder.parsed("player", player.getName()));
+            Component mainTitle = mm.deserialize(pathTitle, Placeholder.parsed("player", player.getName()));
+            Component subtitle = mm.deserialize(pathSubtitle, Placeholder.parsed("player", player.getName()));
         
             Title title = Title.title(mainTitle, subtitle);
 
@@ -76,8 +86,8 @@ public class PlayerJoinListener implements Listener {
 
         // Server title
         if(spawn.getBoolean("spawn_module.messages.player_join_actions.server_title.enable")) {
-            Component mainTitle = mm.deserialize(spawn.getString("spawn_module.messages.player_join_actions.server_title.main_title"), Placeholder.parsed("player", player.getName()));
-            Component subtitle = mm.deserialize(spawn.getString("spawn_module.messages.player_join_actions.server_title.subtitle"), Placeholder.parsed("player", player.getName()));
+            Component mainTitle = mm.deserialize(pathServerTitle, Placeholder.parsed("player", player.getName()));
+            Component subtitle = mm.deserialize(pathServerSubtitle, Placeholder.parsed("player", player.getName()));
 
             Title title = Title.title(mainTitle, subtitle);
 
@@ -97,7 +107,7 @@ public class PlayerJoinListener implements Listener {
                 }
 
                 default -> {
-                    Bukkit.getConsoleSender().sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.invalid_scope"), Placeholder.unparsed("path", "spawn_module.messages.player_join_actions.server_message.scope")));
+                    Bukkit.getConsoleSender().sendMessage(mm.deserialize(invalidScope, Placeholder.unparsed("path", "spawn_module.messages.player_join_actions.server_message.scope")));
                 }
             }
         }
@@ -141,7 +151,7 @@ public class PlayerJoinListener implements Listener {
                 }
 
                 default -> {
-                    Bukkit.getConsoleSender().sendMessage(mm.deserialize(spawn.getString("spawn_module.messages.invalid_scope"), Placeholder.unparsed("path", "spawn_module.messages.player_join_actions.server_message.scope")));
+                    Bukkit.getConsoleSender().sendMessage(mm.deserialize(invalidScope, Placeholder.unparsed("path", "spawn_module.messages.player_join_actions.server_message.scope")));
                 }
             }
         }

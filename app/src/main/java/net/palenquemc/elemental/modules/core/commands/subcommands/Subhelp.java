@@ -6,13 +6,15 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.palenquemc.elemental.Elemental;
 import net.palenquemc.elemental.modules.core.commands.SubcommandTemplate;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class Subhelp implements SubcommandTemplate {
-    private Elemental plugin;
+    private final Elemental plugin;
 
     MiniMessage mm = MiniMessage.miniMessage();
 
@@ -34,13 +36,21 @@ public class Subhelp implements SubcommandTemplate {
     public boolean execute(CommandSender sender, Command command, String[] args) {
         FileConfiguration core = plugin.config.getConfig("core.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        Player player = null;
+        if(sender instanceof Player p) player = p;
+
+        String noPerms = chat.papi(player, core.getString("core_module.insufficient_permissions"));
+        String help = chat.papi(player, core.getString("core_module.plugin_help"));
+
         if(!sender.hasPermission(permission())) {
-            sender.sendMessage(mm.deserialize(core.getString("core_module.insufficient_permissions")));
+            sender.sendMessage(mm.deserialize(noPerms));
         
             return false;
         }
 
-        sender.sendMessage(mm.deserialize(core.getString("core_module.plugin_help")));
+        sender.sendMessage(mm.deserialize(help));
         
         return true;
     }

@@ -11,6 +11,7 @@ import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
+import net.palenquemc.elemental.utils.ChatUtils;
 
 public class PlayerSpawnLocationListener implements Listener {
     
@@ -27,12 +28,16 @@ public class PlayerSpawnLocationListener implements Listener {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
+        ChatUtils chat = new ChatUtils();
+
+        String worldNotFound = chat.papi(event.getPlayer(), core.getString("spawn_module.messages.world_not_found"));
+
         if(spawn.getBoolean("config.spawn.force_on_join")) {
             String worldname = spawn.getString("spawn_module.spawn.location.world");
             World spawnWorld = plugin.getServer().getWorld(worldname);
 
             if(spawnWorld == null) {
-                Bukkit.getConsoleSender().sendMessage(mm.deserialize(core.getString("spawn_module.messages.world_not_found"), Placeholder.unparsed("world", worldname)));
+                Bukkit.getConsoleSender().sendMessage(mm.deserialize(worldNotFound, Placeholder.unparsed("world", worldname)));
             
                 return;
             }
