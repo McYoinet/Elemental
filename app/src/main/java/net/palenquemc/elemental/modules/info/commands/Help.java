@@ -73,7 +73,7 @@ public class Help implements TabExecutor {
         
         FileConfiguration info = plugin.config.getConfig("info.yml");
 
-        ConfigurationSection subcommands = info.getConfigurationSection("help_module.help_command.subcommands");
+        ConfigurationSection subcommands = info.getConfigurationSection("info_module.help_command.subcommands");
 
         subcommands.getKeys(false).forEach(subcommand -> {
             arguments.add(subcommand);

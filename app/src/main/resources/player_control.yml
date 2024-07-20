@@ -105,6 +105,7 @@ player_control_module:
     usage: |-
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Usage: <dark_aqua>/xp <aqua><add | set | remove> <amount> [player]
       <dark_grey>[<#00e580>Elemental<dark_grey>] <white>Example: <dark_aqua>/xp <aqua>add 10 Player1
+    amount_must_be_number: "<dark_grey>[<red>Elemental<dark_grey>] <white>The amount must be a number."
     add:
       self: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>You were granted <light_purple><amount><white> points of experience."
       to_other: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>Player <light_purple><target_player><white> was granted <light_purple><amount><white> experience points."

@@ -40,6 +40,7 @@ public class XPCommand implements TabExecutor {
         String removeXPSelf = chat.papi(player, playerControl.getString("player_control_module.xp.remove.self"));
         String usage = chat.papi(player, playerControl.getString("player_control_module.xp.usage"));
         String targetNotFound = chat.papi(player, core.getString("core_module.target_not_found"));
+        String amountMustBeNumber = chat.papi(player, playerControl.getString("player_control_module.xp.amount_must_be_number"));
 
         String setByOther = playerControl.getString("player_control_module.xp.set.by_other");
         String setToOther = playerControl.getString("player_control_module.xp.set.to_other");
@@ -99,7 +100,15 @@ public class XPCommand implements TabExecutor {
 
             case 3 -> {
                 Player targetPlayer = plugin.getServer().getPlayer(args[2]);
-                int amount = Integer.parseInt(args[1]);
+                int amount = 0;
+
+                try {
+                    amount = Integer.parseInt(args[1]);
+                } catch(NumberFormatException e) {
+                    sender.sendMessage(mm.deserialize(amountMustBeNumber));
+
+                    return true;
+                }
 
                 if(!sender.hasPermission("elemental.xp.others")) {
                     sender.sendMessage(mm.deserialize(noPerms));
@@ -108,7 +117,7 @@ public class XPCommand implements TabExecutor {
                 }
 
                 if(targetPlayer == null) {
-                    sender.sendMessage(mm.deserialize(targetNotFound));
+                    sender.sendMessage(mm.deserialize(targetNotFound, Placeholder.unparsed("target_player", args[2])));
 
                     return true;
                 }
