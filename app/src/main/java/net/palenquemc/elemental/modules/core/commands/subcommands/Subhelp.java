@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.palenquemc.elemental.Elemental;
 import net.palenquemc.elemental.modules.core.commands.SubcommandTemplate;
 import net.palenquemc.elemental.utils.ChatUtils;
@@ -45,7 +46,7 @@ public class Subhelp implements SubcommandTemplate {
         String help = chat.papi(player, core.getString("core_module.plugin_help"));
 
         if(!sender.hasPermission(permission())) {
-            sender.sendMessage(mm.deserialize(noPerms));
+            sender.sendMessage(mm.deserialize(noPerms, Placeholder.unparsed("version", plugin.version)));
         
             return false;
         }
