@@ -11,7 +11,7 @@ loadbefore: [FastAsyncWorldEdit, WorldEdit]
 
 # Contact information
 author: McYoinet
-website: https://plugins.palenquemc.net/Elemental
+website: https://github.com/McYoinet/Elemental/
 
 # Using PlaceholderAPI
 softdepend: [PlaceholderAPI]
@@ -79,6 +79,15 @@ commands:
 permissions:
   elemental.plugininfo:
     description: Allows the usage of /elemental
+    default: op
+  elemental.pluginhelp:
+    description: Allows the usage of /elemental help
+    default: op
+  elemental.pathtest:
+    description: Allows the usage of /elemental pathtest
+    default: op
+  elemental.reload:
+    description: Allows the usage of /elemental reload
     default: op
   elemental.broadcast:
     description: Allows the usage of /broadcast
