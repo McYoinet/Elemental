@@ -30,7 +30,7 @@ public class SetSpawn implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         Player player = null;
         if(sender instanceof Player p) player = p;

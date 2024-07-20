@@ -28,7 +28,7 @@ public class Fly implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration playerControl = plugin.config.getConfig("player_control.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         Player player = null;
         if(sender instanceof Player p) player = p;

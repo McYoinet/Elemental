@@ -33,7 +33,7 @@ public class PlayerQuitListener implements Listener {
     public void onPlayerJoin(PlayerQuitEvent event) {
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
         Player player = event.getPlayer();
 
         String playerMessage = chat.papi(player, spawn.getString("spawn_module.messages.player_quit_actions.server_message.text"));

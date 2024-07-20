@@ -28,7 +28,7 @@ public class PlayerSpawnLocationListener implements Listener {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         String worldNotFound = chat.papi(event.getPlayer(), core.getString("spawn_module.messages.world_not_found"));
 

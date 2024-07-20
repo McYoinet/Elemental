@@ -41,7 +41,7 @@ public class ElementalCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         FileConfiguration core = plugin.config.getConfig("core.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         Player player = null;
         if(sender instanceof Player p) player = p;

@@ -31,7 +31,7 @@ public class ListCommand implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration serverControl = plugin.config.getConfig("server_control.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         Player player = null;
         if(sender instanceof Player p) player = p;

@@ -29,7 +29,7 @@ public class Teleport implements TabExecutor {
         FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration teleport = plugin.config.getConfig("teleport.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         Player player = null;
         if(sender instanceof Player p) player = p;

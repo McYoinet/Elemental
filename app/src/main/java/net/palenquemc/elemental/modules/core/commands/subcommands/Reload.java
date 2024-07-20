@@ -35,7 +35,7 @@ public class Reload implements SubcommandTemplate {
     public boolean execute(CommandSender sender, Command command, String[] args) {
         FileConfiguration core = plugin.config.getConfig("core.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         Player player = null;
         if(sender instanceof Player p) player = p;

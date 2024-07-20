@@ -55,7 +55,7 @@ public class PathTest implements SubcommandTemplate {
 
     @Override
     public boolean execute(CommandSender sender, Command command, String[] args) {
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         FileConfiguration core = plugin.config.getConfig("core.yml");
 

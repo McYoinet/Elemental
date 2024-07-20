@@ -28,7 +28,7 @@ public class Help implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         FileConfiguration info = plugin.config.getConfig("info.yml");
 
-        ChatUtils chat = new ChatUtils();
+        ChatUtils chat = new ChatUtils(plugin);
 
         Player player = null;
         if(sender instanceof Player p) player = p;
