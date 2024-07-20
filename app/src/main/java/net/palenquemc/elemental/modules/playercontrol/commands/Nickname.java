@@ -369,6 +369,7 @@ public class Nickname implements TabExecutor {
                 arguments.add("set");
                 arguments.add("get");
                 arguments.add("clear");
+                arguments.add("list");
             }
 
             case 2 -> {
