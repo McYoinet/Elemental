@@ -2,6 +2,7 @@ package net.palenquemc.elemental.modules.servercontrol.commands;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -43,6 +44,8 @@ public class ListCommand implements TabExecutor {
         String separator = chat.papi(player, serverControl.getString("server_control_module.list.separator"));
         String listFooter = chat.papi(player, serverControl.getString("server_control_module.list.list_footer"));
         String noPlayers = chat.papi(player, serverControl.getString("server_control_module.list.no_players_connected"));
+        int entriesPerPage = serverControl.getInt("server_control_module.list.entries_per_page");
+        String pageNotFound = chat.papi(player, serverControl.getString("server_control_module.list.page_not_found"));
 
         if(!sender.hasPermission("elmental.list")) {
             sender.sendMessage(mm.deserialize(noPerms));
@@ -52,7 +55,11 @@ public class ListCommand implements TabExecutor {
 
         Collection<? extends Player> players = plugin.getServer().getOnlinePlayers();
 
-        StringBuilder bodySerialized = new StringBuilder();
+        int pages = Math.ceilDivExact(players.size(), entriesPerPage);
+
+        if(pages == 0) pages = 1;
+
+        StringBuilder body = new StringBuilder();
 
         MiniMessage serializer = MiniMessage.builder()
                     .tags(TagResolver.builder()
@@ -68,34 +75,56 @@ public class ListCommand implements TabExecutor {
             }
 
             case 0 -> {
-                if(players.isEmpty()) {
-                    sender.sendMessage(mm.deserialize(noPlayers));
+                for(Iterator<? extends Player> it = players.stream().limit((long) entriesPerPage).iterator(); it.hasNext();) {
+                    body.append(serializer.serialize(mm.deserialize(listEntry, Placeholder.unparsed("player", it.next().getName()))));
 
-                    return true;
-                }
-
-                List<List<Player>> playerLists = countAllPlayers();
-
-                for(int i = 0; i < playerLists.get(0).size(); ++i) {
-                    bodySerialized.append(serializer.serialize(mm.deserialize(listEntry, Placeholder.unparsed("player", playerLists.get(0).get(i).getName()))));
-
-                    if(i != playerLists.get(0).size() - 1) {
-                        bodySerialized.append(serializer.serialize(mm.deserialize(separator)));
+                    if(it.hasNext()) {
+                        body.append(serializer.serialize(mm.deserialize(separator)));
                     }
                 }
 
-                sender.sendMessage(mm.deserialize(listHeader, Placeholder.unparsed("page", "1"), Placeholder.unparsed("total", String.valueOf(playerLists.size())), Placeholder.unparsed("count", String.valueOf(plugin.getServer().getOnlinePlayers().size()))));
-                sender.sendMessage(mm.deserialize(bodySerialized.toString()));
+                sender.sendMessage(mm.deserialize(listHeader,
+                    Placeholder.unparsed("page", "1"),
+                    Placeholder.unparsed("total", String.valueOf(pages)),
+                    Placeholder.unparsed("count", String.valueOf(players.size()))));
+
+                sender.sendMessage(mm.deserialize(body.toString()));
                 
                 if(!listFooter.equals("")) {
                     sender.sendMessage(listFooter);
                 }
-                
+
                 return true;
             }
 
             case 1 -> {
+                int page = Integer.parseInt(args[0]);
+
+                if(page > pages || page < 1) {
+                    sender.sendMessage(mm.deserialize(pageNotFound));
+
+                    return true;
+                }
+
+                for(Iterator<? extends Player> it = players.stream().skip((long) entriesPerPage * page).limit((long) entriesPerPage).iterator(); it.hasNext();) {
+                    body.append(serializer.serialize(mm.deserialize(listEntry, Placeholder.unparsed("player", it.next().getName()))));
+
+                    if(it.hasNext()) {
+                        body.append(serializer.serialize(mm.deserialize(separator)));
+                    }
+                }
+
+                sender.sendMessage(mm.deserialize(listHeader,
+                    Placeholder.unparsed("page", "1"),
+                    Placeholder.unparsed("total", String.valueOf(pages)),
+                    Placeholder.unparsed("count", String.valueOf(players.size()))));
+
+                sender.sendMessage(mm.deserialize(body.toString()));
                 
+                if(!listFooter.equals("")) {
+                    sender.sendMessage(listFooter);
+                }
+
                 return true;
             }
         }
@@ -110,36 +139,5 @@ public class ListCommand implements TabExecutor {
         }
 
         return arguments;
-    }
-
-    List<List<Player>> countAllPlayers() { // Now this makes so much more sense, how didn't I think of this before is beyond me
-        List<Player> playersAsList = new ArrayList<>();
-        plugin.getServer().getOnlinePlayers().forEach(p -> playersAsList.add(p));
-
-        List<List<Player>> totalPlayers = new ArrayList<>();
-
-        totalPlayers.add(new ArrayList<>());
-
-        int playerIndex = 0;
-        int pageIndex = 0;
-
-        FileConfiguration serverControl = plugin.config.getConfig("server_control.yml");
-
-        int entriesPerPage = serverControl.getInt("server_control_module.list.entries_per_page");
-
-        while(playerIndex < playersAsList.size()) {
-            if(totalPlayers.get(pageIndex).size() <= entriesPerPage) {
-                totalPlayers.get(pageIndex).add(playersAsList.get(playerIndex));
-            } else {
-                totalPlayers.add(new ArrayList<>());
-                ++pageIndex;
-
-                totalPlayers.get(pageIndex).add(playersAsList.get(playerIndex));
-            }
-
-            ++playerIndex;
-        }
-
-        return totalPlayers;
     }
 }

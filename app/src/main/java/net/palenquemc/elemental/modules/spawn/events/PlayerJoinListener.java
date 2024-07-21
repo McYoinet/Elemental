@@ -44,11 +44,6 @@ public class PlayerJoinListener implements Listener {
         String pathServerTitle = chat.papi(player, spawn.getString("spawn_module.messages.player_join_actions.server_title.main_title"));
         String pathServerSubtitle = chat.papi(player, spawn.getString("spawn_module.messages.player_join_actions.server_title.subtitle"));
 
-        // Player message
-        if(spawn.getBoolean("spawn_module.messages.player_join_actions.player_message.enable")) {
-            player.sendMessage(mm.deserialize(playerMessage, Placeholder.unparsed("player", player.getName())));
-        }
-
         // Server message
         if(spawn.getBoolean("spawn_module.messages.player_join_actions.server_message.enable")) {
             event.joinMessage(null);
@@ -72,6 +67,11 @@ public class PlayerJoinListener implements Listener {
                     Bukkit.getConsoleSender().sendMessage(mm.deserialize(invalidScope, Placeholder.unparsed("path", "spawn_module.messages.player_join_actions.server_message.scope")));
                 }
             }
+        }
+
+        // Player message
+        if(spawn.getBoolean("spawn_module.messages.player_join_actions.player_message.enable")) {
+            player.sendMessage(mm.deserialize(playerMessage, Placeholder.unparsed("player", player.getName())));
         }
 
         // Player title

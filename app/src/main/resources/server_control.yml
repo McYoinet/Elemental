@@ -21,4 +21,5 @@ server_control_module:
     separator: "<white>, "
     list_footer: ""
     no_players_connected: "<dark_grey>[<#00e580>Elemental<dark_grey>] <white>There are no players connected to the server."
+    page_not_found: "<dark_grey>[<red>Elemental<dark_grey>] <white>Page not found."
     entries_per_page: 10

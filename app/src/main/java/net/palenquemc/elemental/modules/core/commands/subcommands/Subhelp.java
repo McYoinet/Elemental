@@ -46,12 +46,12 @@ public class Subhelp implements SubcommandTemplate {
         String help = chat.papi(player, core.getString("core_module.plugin_help"));
 
         if(!sender.hasPermission(permission())) {
-            sender.sendMessage(mm.deserialize(noPerms, Placeholder.unparsed("version", plugin.version)));
+            sender.sendMessage(mm.deserialize(noPerms));
         
             return false;
         }
 
-        sender.sendMessage(mm.deserialize(help));
+        sender.sendMessage(mm.deserialize(help, Placeholder.unparsed("version", plugin.version)));
         
         return true;
     }
