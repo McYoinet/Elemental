@@ -3,6 +3,7 @@ package net.palenquemc.elemental.modules.teleport.commands;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -52,7 +53,7 @@ public class RandomTeleport implements TabExecutor {
             return true;
         }
 
-        List<Player> players = new ArrayList<>();
+        List<UUID> players = new ArrayList<>();
         
         if(plugin.getServer().getOnlinePlayers().size() < 3) {
             sender.sendMessage(mm.deserialize(notEnoughPlayers));
@@ -61,12 +62,12 @@ public class RandomTeleport implements TabExecutor {
         }
 
         plugin.getServer().getOnlinePlayers().forEach(p -> {
-            players.add(p);
+            players.add(p.getUniqueId());
         });
 
         Random random = new Random();
 
-        Player destinationPlayer = players.get(random.nextInt(players.size()));
+        Player destinationPlayer = plugin.getServer().getPlayer(players.get(random.nextInt(players.size())));
 
         if(args.length == 0) {
             if(player == null) {
