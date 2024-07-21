@@ -59,19 +59,19 @@ public class Broadcast implements TabExecutor {
 
         plugin.getServer().sendMessage(mm.deserialize(broadcast, Placeholder.parsed("message", message)));
 
-        if(core.getBoolean("server_control_module.broadcast.sound.enable")) {
-            String source = core.getString("server_control_module.broadcast.sound.source");
-            String key = core.getString("server_control_module.broadcast.sound.key");
+        if(serverControl.getBoolean("server_control_module.broadcast.sound.enable")) {
+            String source = serverControl.getString("server_control_module.broadcast.sound.source");
+            String key = serverControl.getString("server_control_module.broadcast.sound.key");
 
-            float volume = Float.parseFloat(core.getString("server_control_module.broadcast.sound.volume"));
-            float pitch = Float.parseFloat(core.getString("server_control_module.broadcast.sound.pitch"));
+            float volume = Float.parseFloat(serverControl.getString("server_control_module.broadcast.sound.volume"));
+            float pitch = Float.parseFloat(serverControl.getString("server_control_module.broadcast.sound.pitch"));
 
             Sound sound = Sound.sound(Key.key(key), Sound.Source.valueOf(source), volume, pitch);
             
             plugin.getServer().playSound(sound);
         }
 
-        if(core.getBoolean("server_control_module.broadcast.title.enable")) {
+        if(serverControl.getBoolean("server_control_module.broadcast.title.enable")) {
             Component mainTitle = mm.deserialize(pathTitle, Placeholder.parsed("message", message));
             Component subtitle = mm.deserialize(pathSubtitle, Placeholder.parsed("message", message));
 
