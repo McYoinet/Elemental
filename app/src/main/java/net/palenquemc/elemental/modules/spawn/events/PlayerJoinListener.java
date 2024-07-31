@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -21,7 +22,7 @@ import net.palenquemc.elemental.utils.ChatUtils;
 
 public class PlayerJoinListener implements Listener {
 
-    private Elemental plugin;
+    private final Elemental plugin;
     
     public PlayerJoinListener(Elemental plugin) {
         this.plugin = plugin;
@@ -29,7 +30,7 @@ public class PlayerJoinListener implements Listener {
 
     MiniMessage mm = MiniMessage.miniMessage();
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerJoin(PlayerJoinEvent event) {
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 

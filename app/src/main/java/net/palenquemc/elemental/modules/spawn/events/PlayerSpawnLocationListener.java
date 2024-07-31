@@ -15,7 +15,7 @@ import net.palenquemc.elemental.utils.ChatUtils;
 
 public class PlayerSpawnLocationListener implements Listener {
     
-    private Elemental plugin;
+    private final Elemental plugin;
     
     public PlayerSpawnLocationListener(Elemental plugin) {
         this.plugin = plugin;
@@ -25,12 +25,11 @@ public class PlayerSpawnLocationListener implements Listener {
 
     @EventHandler
     public void onPlayerSpawn(PlayerSpawnLocationEvent event) {
-        FileConfiguration core = plugin.config.getConfig("core.yml");
         FileConfiguration spawn = plugin.config.getConfig("spawn.yml");
 
         ChatUtils chat = new ChatUtils(plugin);
 
-        String worldNotFound = chat.papi(event.getPlayer(), core.getString("spawn_module.messages.world_not_found"));
+        String worldNotFound = chat.papi(event.getPlayer(), spawn.getString("spawn_module.messages.world_not_found"));
 
         if(spawn.getBoolean("config.spawn.force_on_join")) {
             String worldname = spawn.getString("spawn_module.spawn.location.world");
